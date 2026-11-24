@@ -341,8 +341,7 @@
     var form = document.getElementById('enquiryForm');
     if (!form) return;
 
-    var STORE_KEY = 'nearbuy.one.v2';
-    var TOPICS = ['Account Creation', 'Fee Structure', 'What Can I Sell?', 'Account Management', 'How to Run Ads?', 'Shipping & Delivery', 'Others'];
+    var TOPICS = ['General enquiry', 'Order help', 'Returns & refunds', 'Selling on NearBuy', 'Delivery partner', 'Payments', 'Others'];
     var nameEl = document.getElementById('enqName');
     var contactEl = document.getElementById('enqContact');
     var topicEl = document.getElementById('enqTopic');
@@ -352,21 +351,25 @@
     var done = document.getElementById('enquiryDone');
     var doneRef = document.getElementById('enquiryRef');
     var again = document.getElementById('enquiryAgain');
+    var submitBtn = form.querySelector('button[type="submit"]');
     var EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
-    function readStore() {
-      try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; }
-      catch (error) { return {}; }
+    /* The enquiry is written to the platform database through the public API and
+     * then appears in the Admin Portal inbox. Nothing is kept in this browser. */
+    function sendEnquiry(payload) {
+      return fetch('/api/customer/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-NearBuy-Request': '1' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (data) {
+          if (!res.ok) throw new Error(data.error || 'The enquiry could not be sent (' + res.status + ').');
+          return data;
+        });
+      });
     }
-    function writeStore(value) {
-      try { localStorage.setItem(STORE_KEY, JSON.stringify(value)); return true; }
-      catch (error) { return false; }
-    }
-    function stamp() {
-      try {
-        return new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', hour: 'numeric', minute: '2-digit' });
-      } catch (error) { return 'Just now'; }
-    }
+
     function phoneDigits(value) {
       var digits = String(value).replace(/\D/g, '');
       if (digits.length === 12 && digits.slice(0, 2) === '91') digits = digits.slice(2);
@@ -378,28 +381,6 @@
       if (!text) return false;
       if (text.indexOf('@') > -1) return EMAIL.test(text);
       return /^[6-9]\d{9}$/.test(phoneDigits(text));
-    }
-    function nextId(store) {
-      var list = Array.isArray(store.enquiries) ? store.enquiries : [];
-      var n = 1042 + list.length;
-      var id = 'ENQ-' + n;
-      while (list.some(function (item) { return item.id === id; })) { n += 1; id = 'ENQ-' + n; }
-      return id;
-    }
-    function saveEnquiry(entry) {
-      var store = readStore();
-      if (!Array.isArray(store.enquiries)) store.enquiries = [];
-      store.enquiries.unshift(entry);
-      if (Array.isArray(store.audit)) {
-        store.audit.unshift({
-          id: 'AUD-' + Date.now(),
-          action: 'Homepage enquiry',
-          detail: entry.topic + ' · ' + entry.name,
-          actor: 'Website visitor',
-          time: 'Just now'
-        });
-      }
-      return writeStore(store);
     }
 
     var fields = [
@@ -449,6 +430,7 @@
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+      if (submitBtn && submitBtn.disabled) return;
       var invalid = [];
       fields.forEach(function (field) {
         var ok = field.test(field.el.value);
@@ -468,26 +450,33 @@
       }
 
       clearSummary();
-      var entry = {
-        id: nextId(readStore()),
+      var label = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      sendEnquiry({
         name: String(nameEl.value).trim().replace(/\s+/g, ' '),
         contact: String(contactEl.value).trim(),
         topic: topicEl.value,
-        message: String(messageEl.value).trim(),
-        status: 'New',
-        source: 'Homepage',
-        at: stamp()
-      };
-      var saved = saveEnquiry(entry);
-
-      if (doneRef) doneRef.textContent = entry.id + (saved ? '' : ' · not saved (storage blocked)');
-      form.hidden = true;
-      if (done) {
-        done.hidden = false;
-        if (done.scrollIntoView) done.scrollIntoView({ behavior: prefersReduced() ? 'auto' : 'smooth', block: 'center' });
-        done.focus({ preventScroll: true });
-      }
-      window.__nbLastEnquiry = entry;
+        message: String(messageEl.value).trim()
+      }).then(function (data) {
+        if (doneRef) doneRef.textContent = data.code || 'received';
+        form.hidden = true;
+        if (done) {
+          done.hidden = false;
+          if (done.scrollIntoView) done.scrollIntoView({ behavior: prefersReduced() ? 'auto' : 'smooth', block: 'center' });
+          done.focus({ preventScroll: true });
+        }
+        form.reset();
+        fields.forEach(function (field) { setError(field, ''); });
+        if (counter) counter.textContent = '0 / 600';
+      }).catch(function (error) {
+        if (summary) {
+          summary.textContent = error.message + ' Check your connection and try again.';
+          summary.hidden = false;
+        }
+      }).then(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = label; }
+      });
     });
 
     if (again) {
@@ -502,10 +491,6 @@
       });
     }
 
-    window.__nbEnquiries = function () {
-      var store = readStore();
-      return Array.isArray(store.enquiries) ? store.enquiries : [];
-    };
     window.__nbSupportReady = true;
   })();
 

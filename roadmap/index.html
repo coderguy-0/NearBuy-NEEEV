@@ -7,10 +7,9 @@
   <meta name="description" content="The 84-item NearBuy blueprint as five reviewable sections. Selections persist in this browser only." />
   <title>Feature checklist — NearBuy</title>
   <link rel="icon" href="/public/assets/nearbuy-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/delivery/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/home.css" />
+  <link rel="stylesheet" href="/public/assets/brand.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -26,7 +25,6 @@
       }, 2500);
     })();
   </script>
-<link rel="stylesheet" href="/public/assets/brand.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -66,16 +64,16 @@
       </a>
       <nav class="nav__links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/portal.html#/shop/explore">Explore shops</a>
+        <a href="/customer/#/shops">Explore shops</a>
         <a href="/about/">About</a>
         <a href="/roadmap/" aria-current="page">Checklist</a>
         <a href="/help/">Help</a>
-        <a href="/help/#support">Contact</a>
+        <a href="/help/#enquiry">Contact</a>
       </nav>
       <div class="nav__actions">
-        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/portal.html">
+        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/demo/">
           <svg class="ic"><use href="#i-layers"/></svg>
-          NearBuy One
+          Try the demo
         </a>
         <a class="btn btn--primary btn--sm" href="/customer/login/">Sign in</a>
         <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
@@ -203,23 +201,23 @@
         <div class="section__head section__head--split">
           <div>
             <span class="eyebrow">Section 4 of 5</span>
-            <h2>Fleet coordination</h2>
+            <h2>Operator & coordinator view</h2>
           </div>
           <p class="rl-count" data-count-for="fleet">0 / 12 reviewed</p>
         </div>
         <ul class="rl-list">
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-0" /> <span>Fleet overview with a live roster</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-1" /> <span>Delivery team management</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-2" /> <span>Work allocation across partners</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-0" /> <span>Delivery roster for every locality</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-1" /> <span>Partner workload at a glance</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-2" /> <span>Work allocation across nearby partners</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-fleet-3" /> <span>Shift and availability planning</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-4" /> <span>Performance reports</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-4" /> <span>Performance reports per partner</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-fleet-5" /> <span>Account and safety settings</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-6" /> <span>Zone coverage per fleet</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-7" /> <span>Escalation of unassigned tasks</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-8" /> <span>Onboarding partners into the fleet</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-6" /> <span>Zone coverage per service area</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-7" /> <span>Escalation of unassigned deliveries</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-8" /> <span>Onboarding partners into the network</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-fleet-9" /> <span>Per-partner payout summary (demo)</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-10" /> <span>Incident review within the fleet</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-11" /> <span>Fleet-level support route</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-10" /> <span>Incident review across the network</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-fleet-11" /> <span>Coordinator-level support route</span></label></li>
         </ul>
       </div>
     </section>
@@ -244,7 +242,7 @@
           <li class="rl-item"><label><input type="checkbox" id="rl-ops-8" /> <span>Pricing bands configuration</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-ops-9" /> <span>Safety and incidents register</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-ops-10" /> <span>Audit log of staff actions</span></label></li>
-          <li class="rl-item"><label><input type="checkbox" id="rl-ops-11" /> <span>One shared data model behind five workspaces</span></label></li>
+          <li class="rl-item"><label><input type="checkbox" id="rl-ops-11" /> <span>One shared data model behind four workspaces</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-ops-12" /> <span>Per-portal sign-in with isolated sessions</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-ops-13" /> <span>Reduced-motion support across the site</span></label></li>
           <li class="rl-item"><label><input type="checkbox" id="rl-ops-14" /> <span>Responsive layouts down to small phones</span></label></li>
@@ -324,19 +322,51 @@
         </a>
         <p class="footer__tagline">Your neighbourhood.<br />Everything you need.</p>
         <p class="footer__meta">Hauz Khas · New Delhi<br />hello@nearbuy.in</p>
-        
+        <div class="footer__social" role="group" aria-label="NearBuy channels">
+          <a href="/help/#support" aria-label="Support"><svg class="ic"><use href="#i-mail"/></svg></a>
+          <a href="/help/#support" aria-label="Call support"><svg class="ic"><use href="#i-phone"/></svg></a>
+          <a href="/about/#trust" aria-label="Trust and safety"><svg class="ic"><use href="#i-shield"/></svg></a>
+        </div>
       </div>
-      
+      <div class="footer__cols">
+        <div>
+          <h4>Explore</h4>
+          <a href="/">Home</a>
+          <a href="/customer/#/products">Browse everything</a>
+          <a href="/customer/#/shops">Nearby shops</a>
+          <a href="/roadmap/">Feature checklist</a>
+        </div>
+        <div>
+          <h4>Portals</h4>
+          <a href="/customer/">Customer</a>
+          <a href="/seller/">Seller</a>
+          <a href="/runner/">Delivery partner</a>
+          <a href="/demo/">Demo accounts</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="/help/">Help centre</a>
+          <a href="/customer/#/help">In-app help</a>
+          <a href="/help/#support">Send an enquiry</a>
+          <a href="/help/#faq">FAQs</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="/about/#trust">Privacy policy</a>
+          <a href="/about/#trust">Terms &amp; conditions</a>
+          <a href="/about/#trust">Refund policy</a>
+          <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
+            <span class="footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="wrap footer__bottom">
       <span>© <span id="year">2026</span> NearBuy. All rights reserved.</span>
-      <span class="footer__disclaimer">Prototype demo · sample data only · no real payments, dispatch or KYC.</span>
-      
+      <span class="footer__disclaimer">Demo dataset · no live payment, dispatch or identity provider connected.</span>
+      <a href="/admin/" class="footer__admin">Operations console ↗</a>
     </div>
-  <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
-            <span class="footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
-          </button>
-</footer>
+  </footer>
   <script src="/home.js"></script>
 </body>
 </html>

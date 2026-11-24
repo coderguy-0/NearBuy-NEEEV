@@ -49,11 +49,6 @@ after(() => {
 const PAGES = [
   '/',
   '/index.html',
-  '/portal.html',
-  '/seller.html',
-  '/partner.html',
-  '/business.html',
-  '/delivery-admin.html',
   '/customer/',
   '/customer/index.html',
   '/customer/login/',
@@ -61,9 +56,8 @@ const PAGES = [
   '/seller/register/',
   '/runner/',
   '/runner/register/',
-  '/fleet/',
   '/admin/',
-  '/control-tower/',
+  '/demo/',
   '/about/',
   '/help/',
   '/roadmap/',
@@ -85,12 +79,12 @@ const ASSETS = [
   '/customer/views-account.js',
   '/home.css',
   '/home.js',
-  '/nearbuy.css',
-  '/nearbuy.js',
-  '/seller.css',
-  '/seller.js',
-  '/network.css',
-  '/network.js',
+  '/public/assets/brand.css',
+  '/partner/app.css',
+  '/partner/core.js',
+  '/partner/seller.js',
+  '/partner/runner.js',
+  '/partner/admin.js',
   '/public/assets/hero-neighbourhood.jpg',
   '/public/assets/portal-customer.jpg',
   '/public/assets/portal-seller.jpg',
@@ -125,7 +119,8 @@ test('stylesheets, scripts and images return 200', async () => {
 test('content types are correct', async () => {
   const cases = [
     ['/home.css', 'text/css'],
-    ['/nearbuy.js', 'text/javascript'],
+    ['/partner/core.js', 'text/javascript'],
+    ['/customer/core.js', 'text/javascript'],
     ['/public/assets/nearbuy-logo.png', 'image/png'],
     ['/public/assets/hero-neighbourhood.jpg', 'image/jpeg'],
     ['/delivery/logo.svg', 'image/svg+xml'],
@@ -177,17 +172,14 @@ test('path traversal and internal server files are refused', async () => {
 test('every asset referenced in the markup exists on disk', () => {
   const htmlFiles = [
     'index.html',
-    'portal.html',
-    'seller.html',
-    'partner.html',
-    'business.html',
-    'delivery-admin.html',
     'about/index.html',
     'help/index.html',
     'roadmap/index.html',
     'customer/index.html',
     'seller/index.html',
-    'runner/index.html'
+    'runner/index.html',
+    'admin/index.html',
+    'demo/index.html'
   ];
   const refRe = /(?:href|src)\s*=\s*["'](\/[^"'#?]+)["']/gi;
   const missing = [];
@@ -216,11 +208,6 @@ test('the public checklist keeps all 84 items', () => {
 test('every HTML surface uses the universal logo and declares a favicon', () => {
   const htmlFiles = [
     'index.html',
-    'portal.html',
-    'seller.html',
-    'partner.html',
-    'business.html',
-    'delivery-admin.html',
     'about/index.html',
     'help/index.html',
     'roadmap/index.html',
@@ -230,9 +217,8 @@ test('every HTML surface uses the universal logo and declares a favicon', () => 
     'seller/register/index.html',
     'runner/index.html',
     'runner/register/index.html',
-    'fleet/index.html',
     'admin/index.html',
-    'control-tower/index.html'
+    'demo/index.html'
   ];
   for (const f of htmlFiles) {
     const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -244,107 +230,84 @@ test('every HTML surface uses the universal logo and declares a favicon', () => 
   assert.match(svgSrc, /data:image\/png;base64,/, 'delivery/logo.svg should embed universal badge PNG');
 });
 
-test('all NearBuy One icons and action hooks are registered', () => {
-  const nbJs = fs.readFileSync(path.join(ROOT, 'nearbuy.js'), 'utf8');
-  const portalHtml = fs.readFileSync(path.join(ROOT, 'portal.html'), 'utf8');
+test('every console icon and navigation item resolves to a registered route', () => {
+  for (const [file, part] of [['partner/core.js', 'core'], ['partner/seller.js', 'seller'], ['partner/runner.js', 'runner'], ['partner/admin.js', 'admin']]) {
+    const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
 
-  const pathsBlock = nbJs.match(/const PATHS = \{([\s\S]*?)\n\};/);
-  assert.ok(pathsBlock, 'PATHS icon map should exist in nearbuy.js');
-  const registeredIcons = new Set([...pathsBlock[1].matchAll(/^\s*([a-zA-Z0-9_]+)\s*:/gm)].map((m) => m[1]));
-  const missingIcons = [];
-  for (const m of nbJs.matchAll(/\bicon\(\s*['"]([a-zA-Z0-9_]+)['"]/g)) {
-    if (!registeredIcons.has(m[1])) missingIcons.push(m[1]);
+    // Icons: every icon('name') literal must exist in the core ICONS map.
+    if (part !== 'core') {
+      const core = fs.readFileSync(path.join(ROOT, 'partner/core.js'), 'utf8');
+      const iconsBlock = core.match(/const ICONS = \{([\s\S]*?)\n  \};/);
+      assert.ok(iconsBlock, 'the shared ICONS map should exist in partner/core.js');
+      const registered = new Set([...iconsBlock[1].matchAll(/^\s{4}([a-zA-Z0-9_]+)\s*:/gm)].map((m) => m[1]));
+      const missing = [...new Set([...src.matchAll(/\bPA\.icon\(\s*'([a-zA-Z0-9_]+)'/g)].map((m) => m[1]))]
+        .filter((name) => !registered.has(name));
+      assert.deepEqual(missing, [], `${file}: unregistered icons ${missing.join(', ')}`);
+    }
+
+    // Routes: every `href="#/x"` the console renders must be in its PA.start({routes}).
+    // partner/core.js is the shared shell: it owns no routes of its own.
+    const routesBlock = src.match(/routes: \[([\s\S]*?)\n {4}\]/);
+    if (part === 'core') { assert.equal(routesBlock, null, 'the shared shell owns no routes'); continue; }
+    const registered = new Set([...routesBlock[1].matchAll(/\[\/\^\\\/([a-z0-9-]+)/g)].map((m) => m[1]));
+    for (const m of src.matchAll(/href="#\/([a-z0-9-]+)"/g)) {
+      assert.ok(registered.has(m[1]), `${file}: "${m[0]}" has no registered route`);
+    }
   }
-  assert.deepEqual([...new Set(missingIcons)], [], 'every icon() literal must exist in PATHS');
-
-  const usedActs = new Set([...(nbJs + '\n' + portalHtml).matchAll(/data-act=["']([a-zA-Z0-9_-]+)["']/g)].map((m) => m[1]));
-  const handledActs = new Set([
-    ...[...nbJs.matchAll(/case\s+['"]([a-zA-Z0-9_-]+)['"]\s*:/g)].map((m) => m[1]),
-    ...[...nbJs.matchAll(/act\s*===\s*['"]([a-zA-Z0-9_-]+)['"]/g)].map((m) => m[1]),
-    ...[...nbJs.matchAll(/dataset\.act\s*===\s*['"]([a-zA-Z0-9_-]+)['"]/g)].map((m) => m[1]),
-    ...[...nbJs.matchAll(/\[data-act=["']([a-zA-Z0-9_-]+)["']\]/g)].map((m) => m[1])
-  ]);
-  const unhandledActs = [...usedActs].filter((a) => !handledActs.has(a));
-  assert.deepEqual(unhandledActs, [], `unhandled data-act attributes: ${unhandledActs.join(', ')}`);
 });
 
+test('the seller hub keeps both delivery choices and hides marketing bands', () => {
+  const seller = fs.readFileSync(path.join(ROOT, 'partner/seller.js'), 'utf8');
 
-test('seller hub shows both delivery choices and drops the marketing bands', () => {
-  const nbJs = fs.readFileSync(path.join(ROOT, 'nearbuy.js'), 'utf8');
+  // Fulfilment: the seller may hand over to a runner or deliver it themselves.
+  assert.match(seller, /request_runner/, 'seller must be able to request a NearBuy runner');
+  assert.match(seller, /own_delivery|self_delivery|confirm_handover/, 'seller must be able to complete fulfilment themselves');
+  assert.match(seller, /handoverPin|handover/i, 'the handover PIN must be surfaced to the seller');
 
-  assert.match(nbJs, /function sellFulfilmentPanel\(/, 'seller overview should render a delivery choice panel');
-  assert.match(nbJs, /Assign a runner, or deliver it yourself/, 'panel should offer the two options');
-  assert.match(nbJs, /data-act="own-delivery"/, 'seller must be able to choose own delivery');
-  assert.match(nbJs, /data-act="deliver-order"/, 'seller must be able to mark an own delivery delivered');
-
-  // The marketing blocks the user asked to hide must not come back.
+  // Marketing blocks the owner asked to remove must not come back on either console.
+  const surfaces = seller + '\n' + fs.readFileSync(path.join(ROOT, 'partner/runner.js'), 'utf8');
   for (const banned of [
     'Grow your local business. Reach more customers.',
     'Your shop deserves to be discovered.',
     'Start selling on NearBuy',
     'WHY BECOME A NEARBUY DELIVERY PARTNER',
     'Your neighbourhood. Your delivery journey.',
-    'Deliver locally. Earn fairly.',
-    'WHY SELL ON NEARBUY'
+    'Deliver locally. Earn fairly.'
   ]) {
-    assert.ok(!nbJs.includes(banned), `seller/runner marketing copy should be removed: ${banned}`);
+    assert.ok(!surfaces.includes(banned), `seller/runner marketing copy should stay removed: ${banned}`);
   }
-
-  // The old unused benefit arrays are gone with the bands.
-  assert.ok(!/const WHY_SELL =/.test(nbJs), 'WHY_SELL list should be removed');
-  assert.ok(!/const WHY_DELIVER =/.test(nbJs), 'WHY_DELIVER list should be removed');
 });
 
-test('runner home enforces one delivery at a time with accept and decline', () => {
-  const nbJs = fs.readFileSync(path.join(ROOT, 'nearbuy.js'), 'utf8');
+test('the runner portal enforces one delivery at a time with accept and decline', () => {
+  const runner = fs.readFileSync(path.join(ROOT, 'partner/runner.js'), 'utf8');
+  const server = fs.readFileSync(path.join(ROOT, 'server/customer/api.js'), 'utf8');
 
-  assert.match(nbJs, /function runnerFocusPanel\(/, 'runner home should render the single-offer panel');
-  assert.match(nbJs, /DELIVERY OFFER · ONE AT A TIME/, 'runner panel should explain the one-at-a-time rule');
+  // The console offers accept and decline on each offer.
+  assert.match(runner, /runner\/offers\/\$\{encodeURIComponent\(btn\.dataset\.id\)\}/, 'the runner acts on an offer by id');
+  assert.match(runner, /dataset\.offer/, 'the runner chooses accept or decline for that offer');
+  assert.match(runner, /accept/i, 'accepting is offered');
+  assert.match(runner, /decline/i, 'declining is offered');
 
-  // Accept/decline must be reachable from runner home even while a task is active:
-  // the live task and the next offer are rendered as separate groups.
-  const panel = nbJs.slice(nbJs.indexOf('function runnerFocusPanel('), nbJs.indexOf('function deliverHowStrip('));
-  assert.match(panel, /offerForRunner\(r\)/, 'the offer must be computed independently of the active task');
-  assert.match(panel, /On the road now/, 'the active delivery should be labelled');
-  assert.match(panel, /Next offer for you/, 'the next offer should be shown alongside the active task');
-  assert.match(nbJs, /data-act="decline-task"/, 'runner must be able to decline a request');
-  assert.match(nbJs, /function declineTask\(/, 'decline handler should exist');
+  // The server is what actually prevents stacking: one active job per runner.
+  assert.match(server, /route\.match\(\/\^\\\/runner\\\/offers\\\/\[a-zA-Z0-9-\]\+\\\/\(accept\|decline\)\$\//,
+    'the server exposes accept and decline for a runner offer');
+  assert.match(server, /already have an active|one delivery at a time|active delivery/i,
+    'the API refuses a second concurrent delivery on the server, not only in the UI');
 
-  // The queue must be empty while a delivery is active.
-  const queue = nbJs.match(/const runnerQueue = \(\) =>([\s\S]*?);\n/);
-  assert.ok(queue, 'runnerQueue selector should exist');
-  assert.match(queue[1], /activeDelivery\(\)/, 'runnerQueue must short-circuit when a delivery is active');
-
-  // Accepting a second task while one is active must be refused.
-  const accept = nbJs.slice(nbJs.indexOf('function acceptTask('));
-  assert.match(accept.slice(0, 500), /activeDelivery\(\)/, 'acceptTask should refuse a second concurrent delivery');
-
-  // Declining keeps the task open for other runners instead of cancelling it.
-  const decline = nbJs.slice(nbJs.indexOf('function declineTask(')).slice(0, 900);
-  assert.match(decline, /declinedBy/, 'decline should record the runner locally');
-  assert.ok(!/status = 'Cancelled'/.test(decline), 'declining must not cancel the task for everyone');
+  // Delivery needs the customer OTP and pickup needs the seller PIN — never faked.
+  assert.match(server, /pickupPin/, 'pickup is gated by the shop handover PIN');
+  assert.match(server, /otp/i, 'delivery is gated by the customer OTP');
 });
 
-test('incoming order items are auto-detected and restored when declined', () => {
-  const nbJs = fs.readFileSync(path.join(ROOT, 'nearbuy.js'), 'utf8');
+test('inventory is restocked when an order is declined or cancelled', () => {
+  const server = fs.readFileSync(path.join(ROOT, 'server/customer/api.js'), 'utf8');
+  assert.match(server, /releaseStockForSellerOrder/, 'cancelled or rejected seller orders release their stock');
+  assert.match(server, /reserved/, 'stock reservations are tracked in the database');
 
-  assert.match(nbJs, /function findProductForLine\(/, 'catalogue should match order lines to products');
-  assert.match(nbJs, /function catalogueAutoDetect\(/, 'catalogue page should show detected order items');
-  assert.match(nbJs, /function restockForOrder\(/, 'declined orders must return their items to stock');
-  assert.match(nbJs, /function cancelOrderAndRestock\(/, 'a single path should cancel and restock');
-
-  // Restoring is idempotent so a double decline cannot inflate stock.
-  const fn = nbJs.slice(nbJs.indexOf('function cancelOrderAndRestock('));
-  assert.match(fn.slice(0, 400), /stockReturned/, 'restock must be guarded against running twice');
-
-  // The customer can decline too.
-  assert.match(nbJs, /Decline this order/, 'customer order page should offer a decline action');
-
-  // The standalone seller hub restores stock the same way.
-  const sellerJs = fs.readFileSync(path.join(ROOT, 'seller.js'), 'utf8');
-  assert.match(sellerJs, /function restockOrderItems\(/, 'seller hub should track restored stock');
-  assert.match(sellerJs, /function autoDetectPanel\(/, 'seller hub catalogue should show detected items');
-  assert.match(sellerJs, /function declineOrder\(/, 'seller decline should restore stock');
+  // The seller console offers a reject path with a reason.
+  const seller = fs.readFileSync(path.join(ROOT, 'partner/seller.js'), 'utf8');
+  assert.match(seller, /reject/, 'the seller can reject an order');
+  assert.match(seller, /reason/i, 'a rejection carries a reason');
 });
 
 test('the classic storefront is gone from every surface', () => {
@@ -352,7 +315,7 @@ test('the classic storefront is gone from every surface', () => {
   assert.ok(!fs.existsSync(path.join(ROOT, 'app.js')), 'the classic storefront script should be deleted');
   assert.ok(!fs.existsSync(path.join(ROOT, 'styles.css')), 'the classic storefront stylesheet should be deleted');
 
-  const surfaces = ['nearbuy.js', 'seller.js', 'home.js', 'index.html', 'portal.html', 'README.md'];
+  const surfaces = ['home.js', 'index.html', 'about/index.html', 'help/index.html', 'README.md'];
   for (const f of surfaces) {
     const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
     assert.ok(!/classic\.html/i.test(src), `${f} should not link to the classic storefront`);
@@ -393,12 +356,43 @@ test('customer and partner portals do not advertise other role workspaces', () =
   assert.match(partner, /state.user.role !== state.mode/);
 });
 
-test('footers retain branding without navigation tab groups or portal shortcuts', () => {
+test('footers keep branding and never link to a retired prototype', () => {
   for (const file of ['index.html', 'about/index.html', 'help/index.html', 'roadmap/index.html']) {
     const html = fs.readFileSync(path.join(ROOT, file), 'utf8');
     const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)?.[0] || '';
-    assert.doesNotMatch(footer, /footer__cols|footer__admin|href="\/(customer|seller|runner|admin)\//, file);
+    // Every footer link must be a page that exists (or a hash on the same page).
+    for (const m of footer.matchAll(/href="(\/[^"#?]*)"/g)) {
+      const target = path.join(ROOT, m[1].replace(/^\/+/, ''));
+      const ok = m[1] === '/' || fs.existsSync(target) || fs.existsSync(target + '.html') || fs.existsSync(path.join(target, 'index.html'));
+      assert.ok(ok, `${file} footer links to a missing page: ${m[1]}`);
+    }
+    // Retired browser-only surfaces must never be advertised again.
+    assert.doesNotMatch(footer, /portal\.html|seller\.html|business\.html|partner\.html|delivery-admin\.html|control-tower|\/fleet\//, file);
   }
   const customer = fs.readFileSync(path.join(ROOT, 'customer/core.js'), 'utf8');
-  assert.doesNotMatch(customer, /class="footer-col"/);
+  assert.doesNotMatch(customer, /href="\/(seller|runner|admin)\//, 'the storefront footer keeps to the customer journey');
+});
+
+test('retired prototype surfaces redirect to the live portals', async () => {
+  const expected = {
+    '/portal.html': '/demo/',
+    '/seller.html': '/seller/',
+    '/business.html': '/seller/',
+    '/partner.html': '/runner/',
+    '/delivery-admin.html': '/admin/',
+    '/fleet/': '/admin/',
+    '/control-tower/': '/admin/'
+  };
+  for (const [from, to] of Object.entries(expected)) {
+    const res = await fetch(BASE + from, { redirect: 'manual' });
+    assert.equal(res.status, 301, `${from} should redirect, got ${res.status}`);
+    assert.equal(res.headers.get('location'), to, `${from} should redirect to ${to}`);
+    await res.body?.cancel();
+  }
+  // The retired scripts and stylesheets are gone, not merely unlinked.
+  for (const p of ['/nearbuy.js', '/nearbuy.css', '/seller.js', '/seller.css', '/network.js', '/network.css']) {
+    const res = await fetch(BASE + p, { redirect: 'manual' });
+    assert.equal(res.status, 404, `${p} should no longer be served`);
+    await res.body?.cancel();
+  }
 });

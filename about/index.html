@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#06245e" />
-  <meta name="description" content="What NearBuy is, how the neighbourhood model works, the three portals on one backend, and the trust and prototype rules we hold ourselves to." />
+  <meta name="description" content="What NearBuy is, how the neighbourhood model works, the four portals on one backend, and the trust rules we hold ourselves to." />
   <title>About NearBuy — the neighbourhood model</title>
   <link rel="icon" href="/public/assets/nearbuy-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/delivery/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/home.css" />
+  <link rel="stylesheet" href="/public/assets/brand.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -26,7 +25,6 @@
       }, 2500);
     })();
   </script>
-<link rel="stylesheet" href="/public/assets/brand.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -66,16 +64,16 @@
       </a>
       <nav class="nav__links" aria-label="Primary">
         <a href="/">Home</a>
-        <a href="/portal.html#/shop/explore">Explore shops</a>
+        <a href="/customer/#/shops">Explore shops</a>
         <a href="/about/" aria-current="page">About</a>
         <a href="/roadmap/">Checklist</a>
         <a href="/help/">Help</a>
-        <a href="/help/#support">Contact</a>
+        <a href="/help/#enquiry">Contact</a>
       </nav>
       <div class="nav__actions">
-        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/portal.html">
+        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/demo/">
           <svg class="ic"><use href="#i-layers"/></svg>
-          NearBuy One
+          Try the demo
         </a>
         <a class="btn btn--primary btn--sm" href="/customer/login/">Sign in</a>
         <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
@@ -90,10 +88,10 @@
         <span class="page-hero__crumb"><a href="/">Home</a> / About</span>
         <span class="eyebrow eyebrow--live">About NearBuy</span>
         <h1>Your neighbourhood, organised.</h1>
-        <p>NearBuy connects the shops on your street with the people who live around them — and with the neighbours who deliver between the two. One shared data model sits behind a customer storefront, a seller hub, a delivery partner app, fleet coordination and an operations console.</p>
+        <p>NearBuy connects the shops on your street with the people who live around them — and with the neighbours who deliver between the two. One shared data model sits behind a customer storefront, a seller hub, a delivery-partner app and an operations console.</p>
         <div class="page-hero__actions">
           <a class="btn btn--primary" href="/customer/">Open the storefront <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost" href="/portal.html">See NearBuy One</a>
+          <a class="btn btn--ghost" href="/demo/">Try the four demos</a>
         </div>
       </div>
     </section>
@@ -104,12 +102,12 @@
           <span class="eyebrow">The idea</span>
           <h2>Commerce that stays on your street.</h2>
           <p>Marketplaces optimise for the cheapest seller anywhere. NearBuy optimises for the <strong>nearest</strong> seller: the grocer who knows your order, the bakery that sells out by ten, the stationer two lanes over. Distance is the feature, not a constraint.</p>
-          <p>Every shop keeps its own catalogue, stock, timings and fulfilment preference. NearBuy adds the parts a single shop cannot afford alone — discovery, ordering, payments records, delivery coordination and a control tower for the network.</p>
+          <p>Every shop keeps its own catalogue, stock, timings and fulfilment preference. NearBuy adds the parts a single shop cannot afford alone — discovery, ordering, payment records, delivery coordination and an operations console for the network.</p>
           <p>Nothing here replaces the shopkeeper. It gives them a counter on the internet that behaves like the one they already run.</p>
         </div>
         <div class="stat-stack" data-reveal>
-          <div><b>5</b><small>workspaces on one shared data model</small></div>
-          <div><b>3</b><small>separate front doors with independent sign-in</small></div>
+          <div><b>4</b><small>workspaces on one shared data model</small></div>
+          <div><b>4</b><small>separate front doors with independent sign-in</small></div>
           <div><b>84</b><small>features tracked on the public checklist</small></div>
           <div><b>0</b><small>real payments, dispatch or KYC in this demo</small></div>
         </div>
@@ -156,7 +154,7 @@
         <div class="section__head section__head--split" data-reveal>
           <div>
             <span class="eyebrow">One backend</span>
-            <h2>Three front doors.</h2>
+            <h2>Four front doors.</h2>
           </div>
           <p>Each portal signs in on its own and opens only its own tools. Landing on another portal shows that portal&rsquo;s sign-in — a customer session never unlocks seller, partner or operations screens.</p>
         </div>
@@ -214,12 +212,12 @@
           <h2>The rules we hold ourselves to.</h2>
         </div>
         <div class="trust__grid">
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-lock"/></svg></span><h3>Sessions stay put</h3><p>Each portal keeps its own session in the current tab and clears it on sign-out, so one login never opens another workspace.</p></div>
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-shield"/></svg></span><h3>Verification, not buttons</h3><p>Age gates, document checks and pickup PINs are modelled as real steps — the demo simulates them rather than skipping them.</p></div>
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-inbox"/></svg></span><h3>Nothing leaves your browser</h3><p>Enquiries, orders and applications in this prototype are stored locally and labelled DEMO DATA. No email is sent and no one is paged.</p></div>
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-check"/></svg></span><h3>Humans decide</h3><p>Approvals, refunds and sensitive actions are described as staff decisions with reason codes and appeals — automation must never make irreversible calls.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-lock"/></svg></span><h3>Sessions stay put</h3><p>Each portal has its own <code>HttpOnly</code> session cookie, cleared on sign-out. Signing in to one workspace never opens another.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-shield"/></svg></span><h3>Verification, not buttons</h3><p>Shop approvals, pickup PINs and the customer delivery OTP are enforced by the server, so a screen alone cannot skip a step. Document checks are recorded, not really verified.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-inbox"/></svg></span><h3>Everything stays on the server</h3><p>Enquiries, orders and applications are rows in the NearBuy database, not your browser. Support notes are visible to the operations team; nothing is forwarded by email because no provider is connected.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-check"/></svg></span><h3>Humans decide</h3><p>Shop approvals, returns and refunds queue up for staff in the Admin Portal, each with a reason and an audit-log entry, instead of happening automatically.</p></div>
         </div>
-        <p class="trust__note" data-reveal><strong>Prototype notice.</strong> This is a simulated demo. Checkout charges nothing, no shop is contacted, no runner is dispatched, no OTP is sent, no application is really verified, no payout or bank account exists, and no personal or sensitive information should be entered. Maps, distances and pricing are schematic.</p>
+        <p class="trust__note" data-reveal><strong>Demo notice.</strong> This deployment runs on a seeded sample dataset shared between demo visitors. Orders, stock changes, support tickets and approvals write to the real database, but no money moves: card and UPI payments are disabled unless gateway keys are configured, payouts are recorded rather than transferred, and identity documents are not really verified. Do not enter personal or sensitive information. Map tiles are not connected, so distances are straight-line estimates.</p>
       </div>
     </section>
   </main>
@@ -234,19 +232,51 @@
         </a>
         <p class="footer__tagline">Your neighbourhood.<br />Everything you need.</p>
         <p class="footer__meta">Hauz Khas · New Delhi<br />hello@nearbuy.in</p>
-        
+        <div class="footer__social" role="group" aria-label="NearBuy channels">
+          <a href="/help/#support" aria-label="Support"><svg class="ic"><use href="#i-mail"/></svg></a>
+          <a href="/help/#support" aria-label="Call support"><svg class="ic"><use href="#i-phone"/></svg></a>
+          <a href="/about/#trust" aria-label="Trust and safety"><svg class="ic"><use href="#i-shield"/></svg></a>
+        </div>
       </div>
-      
+      <div class="footer__cols">
+        <div>
+          <h4>Explore</h4>
+          <a href="/">Home</a>
+          <a href="/customer/#/products">Browse everything</a>
+          <a href="/customer/#/shops">Nearby shops</a>
+          <a href="/roadmap/">Feature checklist</a>
+        </div>
+        <div>
+          <h4>Portals</h4>
+          <a href="/customer/">Customer</a>
+          <a href="/seller/">Seller</a>
+          <a href="/runner/">Delivery partner</a>
+          <a href="/demo/">Demo accounts</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="/help/">Help centre</a>
+          <a href="/customer/#/help">In-app help</a>
+          <a href="/help/#support">Send an enquiry</a>
+          <a href="/help/#faq">FAQs</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="/about/#trust">Privacy policy</a>
+          <a href="/about/#trust">Terms &amp; conditions</a>
+          <a href="/about/#trust">Refund policy</a>
+          <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
+            <span class="footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="wrap footer__bottom">
       <span>© <span id="year">2026</span> NearBuy. All rights reserved.</span>
-      <span class="footer__disclaimer">Prototype demo · sample data only · no real payments, dispatch or KYC.</span>
-      
+      <span class="footer__disclaimer">Demo dataset · no live payment, dispatch or identity provider connected.</span>
+      <a href="/admin/" class="footer__admin">Operations console ↗</a>
     </div>
-  <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
-            <span class="footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
-          </button>
-</footer>
+  </footer>
   <script src="/home.js"></script>
 </body>
 </html>

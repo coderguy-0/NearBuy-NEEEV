@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url('/delivery/fonts/dm-sans-latin-wght-normal.woff2') format('woff2');
+}
+
 /* ============================================================================
    NearBuy — universal homepage
    Deep navy · marigold · soft 3D depth · one connected ecosystem
@@ -26,8 +34,8 @@
   --ink: #0c1a33;
   --ink-2: #16263f;
   --text: #223350;
-  --muted: #6f7b8f;
-  --muted-2: #939cae;
+  --muted: #5c6879;
+  --muted-2: #7c8695;
   --line: #e9e2d5;
   --line-soft: #f2ece1;
 
@@ -35,7 +43,7 @@
   --on-dark-muted: #9db1d2;
   --line-dark: rgba(255, 255, 255, .11);
 
-  --display: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --body: 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --r-sm: 12px;
@@ -1012,6 +1020,18 @@ html[data-motion="reduced"] [data-reveal] { opacity: 1 !important; transform: no
   .page-hero { padding-top: 112px; }
   .help-links { grid-template-columns: minmax(0, 1fr); }
   .stat-stack { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Help centre: routes on the left, the enquiry form on the right. */
+.help-contact { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 18px; align-items: start; }
+.help-contact .help-links { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.help-contact .support__card { margin: 0; }
+@media (max-width: 900px) {
+  .help-contact { grid-template-columns: minmax(0, 1fr); }
+  .help-contact .help-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .help-contact .help-links { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ============================================================================

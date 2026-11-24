@@ -22,14 +22,13 @@ const MARK = `<img src="/public/assets/nearbuy-logo.png" width="42" height="42" 
 function head(title, desc) {
   return `<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#081428" />
+  <meta name="theme-color" content="#06245e" />
   <meta name="description" content="${desc}" />
   <title>${title}</title>
   <link rel="icon" href="/public/assets/nearbuy-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/delivery/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/home.css" />
+  <link rel="stylesheet" href="/public/assets/brand.css" />
   <script>
     (function () {
       var d = document.documentElement;
@@ -58,16 +57,16 @@ function nav(active) {
       </a>
       <nav class="nav__links" aria-label="Primary">
         ${link('/', 'Home', 'home')}
-        ${link('/portal.html#/shop/explore', 'Explore shops', 'explore')}
+        ${link('/customer/#/shops', 'Explore shops', 'explore')}
         ${link('/about/', 'About', 'about')}
         ${link('/roadmap/', 'Checklist', 'roadmap')}
         ${link('/help/', 'Help', 'help')}
-        ${link('/help/#support', 'Contact', 'contact')}
+        ${link(active === 'help' ? '#enquiry' : '/help/#enquiry', 'Contact', 'contact')}
       </nav>
       <div class="nav__actions">
-        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/portal.html">
+        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/demo/">
           <svg class="ic"><use href="#i-layers"/></svg>
-          NearBuy One
+          Try the demo
         </a>
         <a class="btn btn--primary btn--sm" href="/customer/login/">Sign in</a>
         <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
@@ -100,8 +99,8 @@ function footer() {
         <div>
           <h4>Explore</h4>
           <a href="/">Home</a>
-          <a href="/portal.html#/shop/explore">Browse everything</a>
-          <a href="/portal.html#/shop/shops">Nearby shops</a>
+          <a href="/customer/#/products">Browse everything</a>
+          <a href="/customer/#/shops">Nearby shops</a>
           <a href="/roadmap/">Feature checklist</a>
         </div>
         <div>
@@ -109,12 +108,12 @@ function footer() {
           <a href="/customer/">Customer</a>
           <a href="/seller/">Seller</a>
           <a href="/runner/">Delivery partner</a>
-          <a href="/portal.html">NearBuy One</a>
+          <a href="/demo/">Demo accounts</a>
         </div>
         <div>
           <h4>Support</h4>
           <a href="/help/">Help centre</a>
-          <a href="/portal.html#/shop/help">In-app help</a>
+          <a href="/customer/#/help">In-app help</a>
           <a href="/help/#support">Send an enquiry</a>
           <a href="/help/#faq">FAQs</a>
         </div>
@@ -131,8 +130,8 @@ function footer() {
     </div>
     <div class="wrap footer__bottom">
       <span>© <span id="year">2026</span> NearBuy. All rights reserved.</span>
-      <span class="footer__disclaimer">Prototype demo · sample data only · no real payments, dispatch or KYC.</span>
-      <a href="/control-tower/" class="footer__admin">Operations console ↗</a>
+      <span class="footer__disclaimer">Demo dataset · no live payment, dispatch or identity provider connected.</span>
+      <a href="/admin/" class="footer__admin">Operations console ↗</a>
     </div>
   </footer>`;
 }
@@ -163,10 +162,10 @@ const aboutBody = `    <section class="page-hero">
         <span class="page-hero__crumb"><a href="/">Home</a> / About</span>
         <span class="eyebrow eyebrow--live">About NearBuy</span>
         <h1>Your neighbourhood, organised.</h1>
-        <p>NearBuy connects the shops on your street with the people who live around them — and with the neighbours who deliver between the two. One shared data model sits behind a customer storefront, a seller hub, a delivery partner app, fleet coordination and an operations console.</p>
+        <p>NearBuy connects the shops on your street with the people who live around them — and with the neighbours who deliver between the two. One shared data model sits behind a customer storefront, a seller hub, a delivery-partner app and an operations console.</p>
         <div class="page-hero__actions">
           <a class="btn btn--primary" href="/customer/">Open the storefront <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost" href="/portal.html">See NearBuy One</a>
+          <a class="btn btn--ghost" href="/demo/">Try the four demos</a>
         </div>
       </div>
     </section>
@@ -177,12 +176,12 @@ const aboutBody = `    <section class="page-hero">
           <span class="eyebrow">The idea</span>
           <h2>Commerce that stays on your street.</h2>
           <p>Marketplaces optimise for the cheapest seller anywhere. NearBuy optimises for the <strong>nearest</strong> seller: the grocer who knows your order, the bakery that sells out by ten, the stationer two lanes over. Distance is the feature, not a constraint.</p>
-          <p>Every shop keeps its own catalogue, stock, timings and fulfilment preference. NearBuy adds the parts a single shop cannot afford alone — discovery, ordering, payments records, delivery coordination and a control tower for the network.</p>
+          <p>Every shop keeps its own catalogue, stock, timings and fulfilment preference. NearBuy adds the parts a single shop cannot afford alone — discovery, ordering, payment records, delivery coordination and an operations console for the network.</p>
           <p>Nothing here replaces the shopkeeper. It gives them a counter on the internet that behaves like the one they already run.</p>
         </div>
         <div class="stat-stack" data-reveal>
-          <div><b>5</b><small>workspaces on one shared data model</small></div>
-          <div><b>3</b><small>separate front doors with independent sign-in</small></div>
+          <div><b>4</b><small>workspaces on one shared data model</small></div>
+          <div><b>4</b><small>separate front doors with independent sign-in</small></div>
           <div><b>84</b><small>features tracked on the public checklist</small></div>
           <div><b>0</b><small>real payments, dispatch or KYC in this demo</small></div>
         </div>
@@ -229,7 +228,7 @@ const aboutBody = `    <section class="page-hero">
         <div class="section__head section__head--split" data-reveal>
           <div>
             <span class="eyebrow">One backend</span>
-            <h2>Three front doors.</h2>
+            <h2>Four front doors.</h2>
           </div>
           <p>Each portal signs in on its own and opens only its own tools. Landing on another portal shows that portal&rsquo;s sign-in — a customer session never unlocks seller, partner or operations screens.</p>
         </div>
@@ -287,12 +286,12 @@ const aboutBody = `    <section class="page-hero">
           <h2>The rules we hold ourselves to.</h2>
         </div>
         <div class="trust__grid">
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-lock"/></svg></span><h3>Sessions stay put</h3><p>Each portal keeps its own session in the current tab and clears it on sign-out, so one login never opens another workspace.</p></div>
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-shield"/></svg></span><h3>Verification, not buttons</h3><p>Age gates, document checks and pickup PINs are modelled as real steps — the demo simulates them rather than skipping them.</p></div>
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-inbox"/></svg></span><h3>Nothing leaves your browser</h3><p>Enquiries, orders and applications in this prototype are stored locally and labelled DEMO DATA. No email is sent and no one is paged.</p></div>
-          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-check"/></svg></span><h3>Humans decide</h3><p>Approvals, refunds and sensitive actions are described as staff decisions with reason codes and appeals — automation must never make irreversible calls.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-lock"/></svg></span><h3>Sessions stay put</h3><p>Each portal has its own <code>HttpOnly</code> session cookie, cleared on sign-out. Signing in to one workspace never opens another.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-shield"/></svg></span><h3>Verification, not buttons</h3><p>Shop approvals, pickup PINs and the customer delivery OTP are enforced by the server, so a screen alone cannot skip a step. Document checks are recorded, not really verified.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-inbox"/></svg></span><h3>Everything stays on the server</h3><p>Enquiries, orders and applications are rows in the NearBuy database, not your browser. Support notes are visible to the operations team; nothing is forwarded by email because no provider is connected.</p></div>
+          <div class="trust-item" data-reveal><span class="portal-card__icon"><svg class="ic"><use href="#i-check"/></svg></span><h3>Humans decide</h3><p>Shop approvals, returns and refunds queue up for staff in the Admin Portal, each with a reason and an audit-log entry, instead of happening automatically.</p></div>
         </div>
-        <p class="trust__note" data-reveal><strong>Prototype notice.</strong> This is a simulated demo. Checkout charges nothing, no shop is contacted, no runner is dispatched, no OTP is sent, no application is really verified, no payout or bank account exists, and no personal or sensitive information should be entered. Maps, distances and pricing are schematic.</p>
+        <p class="trust__note" data-reveal><strong>Demo notice.</strong> This deployment runs on a seeded sample dataset shared between demo visitors. Orders, stock changes, support tickets and approvals write to the real database, but no money moves: card and UPI payments are disabled unless gateway keys are configured, payouts are recorded rather than transferred, and identity documents are not really verified. Do not enter personal or sensitive information. Map tiles are not connected, so distances are straight-line estimates.</p>
       </div>
     </section>`;
 
@@ -301,11 +300,11 @@ const FAQS = [
   ['What is NearBuy?', 'NearBuy is a neighbourhood commerce platform that connects customers with local shops and short-distance delivery partners. It brings nearby stores, everyday products and Runner delivery together in one place.'],
   ['How do I find shops that deliver to me?', 'Open the customer storefront and choose your neighbourhood. Only shops that are serviceable to your address are shown, with distance, opening hours and what they sell.'],
   ['Can I order from more than one shop at once?', 'Yes. Your basket holds items from several shops and splits into one order per shop at checkout, each with its own fulfilment method and tracking.'],
-  ['How do I register my shop?', 'Use the seller registration route to work through a seven-step application: account, business, store details, location, operations, payout and review. In this demo verification is simulated and you can explore the Seller Hub immediately.'],
-  ['How do I become a delivery partner?', 'Start the partner application, pass the 18+ age gate, add documents and an emergency contact, read the safety briefing, then go online. You control your distance, parcel categories and availability at any time.'],
+  ['How do I register my shop?', 'Use the seller registration route at /seller/register/ to work through a three-step application: account, business details, then KYC documents. The Admin Portal reviews every application, and selling unlocks once your shop is approved.'],
+  ['How do I become a delivery partner?', 'Send the application form at /runner/register/. It is stored in the platform database and reviewed by operations; once approved you sign in to the Runner Portal, go online and control your own availability.'],
   ['What does delivery cost?', 'Delivery fees follow the pricing bands set for your service area and are shown before you confirm. Shops may offer free delivery above a basket value — the storefront labels those offers.'],
   ['How do refunds and returns work?', 'Raise an issue on an order from your account. The shop reviews it, can restock items and issue a refund; the ledger and settlement statement reflect the adjustment.'],
-  ['Is my data shared between portals?', 'No. Customer, seller, partner, fleet and operations sessions are separate and isolated. Signing in to one portal never grants access to another.'],
+  ['Is my data shared between portals?', 'No. Customer, seller, delivery-partner and administrator sessions are separate cookies and isolated on the server. Signing in to one portal never grants access to another.'],
 ];
 
 const helpBody = `    <section class="page-hero">
@@ -315,8 +314,8 @@ const helpBody = `    <section class="page-hero">
         <h1>Help &amp; Support.</h1>
         <p>Quick routes into every support surface, the questions people ask most, and a direct line to the team. In the product, each workspace also carries its own help: the storefront, the Seller Hub and the partner app all have a help centre with context-specific answers.</p>
         <div class="page-hero__actions">
-          <a class="btn btn--primary" href="#support">Send an enquiry <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost" href="/portal.html#/shop/help">Open in-app help</a>
+          <a class="btn btn--primary" href="#enquiry">Send an enquiry <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost" href="/customer/#/help">Open in-app help</a>
         </div>
       </div>
     </section>
@@ -328,10 +327,10 @@ const helpBody = `    <section class="page-hero">
           <h2>Jump straight to the right place.</h2>
         </div>
         <div class="help-links">
-          <a class="help-link" href="/portal.html#/shop/orders" data-reveal><svg class="ic"><use href="#i-box"/></svg><b>Track an order</b><small>Live status, courier and proof of delivery for every order you have placed.</small></a>
-          <a class="help-link" href="/portal.html#/sell/support" data-reveal><svg class="ic"><use href="#i-store"/></svg><b>Seller support</b><small>Tickets, FAQs and the seller academy for running your shop.</small></a>
-          <a class="help-link" href="/portal.html#/deliver/safety" data-reveal><svg class="ic"><use href="#i-shield"/></svg><b>Partner safety</b><small>Safety centre, incident reporting and operational limits for couriers.</small></a>
-          <a class="help-link" href="#support" data-reveal><svg class="ic"><use href="#i-mail"/></svg><b>Report an issue</b><small>Send the team a query — four fields, reviewed in this demo the same day.</small></a>
+          <a class="help-link" href="/customer/#/orders" data-reveal><svg class="ic"><use href="#i-box"/></svg><b>Track an order</b><small>Live status, courier and proof of delivery for every order you have placed.</small></a>
+          <a class="help-link" href="/seller/" data-reveal><svg class="ic"><use href="#i-store"/></svg><b>Seller support</b><small>Tickets, FAQs and the seller academy for running your shop.</small></a>
+          <a class="help-link" href="/runner/" data-reveal><svg class="ic"><use href="#i-shield"/></svg><b>Partner safety</b><small>Safety centre, incident reporting and operational limits for couriers.</small></a>
+          <a class="help-link" href="/#support" data-reveal><svg class="ic"><use href="#i-mail"/></svg><b>Report an issue</b><small>Send the team a query — four fields, saved to the operations inbox.</small></a>
         </div>
       </div>
     </section>
@@ -359,13 +358,81 @@ ${FAQS.map(
             <span class="eyebrow">Support routes</span>
             <h2>Every way to reach us.</h2>
           </div>
-          <p>The enquiry form lives on the homepage so it is always one tap from the front door. Queries land in the operations console under <strong>Enquiries</strong>; in this prototype they are stored in your browser only.</p>
+          <p>The enquiry form lives on the homepage so it is always one tap from the front door. Every query is saved to the NearBuy database and appears in the Admin Portal under <strong>Enquiries</strong>, where the team can reply and close it.</p>
         </div>
-        <div class="help-links">
-          <a class="help-link" href="/#support" data-reveal><svg class="ic"><use href="#i-mail"/></svg><b>Enquiry form</b><small>Name, contact, topic and message — the fastest way to reach the team.</small></a>
-          <a class="help-link" href="/portal.html#/shop/help" data-reveal><svg class="ic"><use href="#i-bag"/></svg><b>Storefront help</b><small>Order, refund and delivery answers in the customer workspace.</small></a>
-          <a class="help-link" href="/portal.html#/ops/enquiries" data-reveal><svg class="ic"><use href="#i-inbox"/></svg><b>Operations inbox</b><small>Where submitted enquiries are triaged by staff (access code required).</small></a>
-          <a class="help-link" href="/about/#trust" data-reveal><svg class="ic"><use href="#i-lock"/></svg><b>Trust &amp; privacy</b><small>How sessions, demo data and verification are handled in this prototype.</small></a>
+        <div class="help-contact">
+          <div class="help-links">
+            <a class="help-link" href="/customer/#/help" data-reveal><svg class="ic"><use href="#i-bag"/></svg><b>Storefront help</b><small>Order, refund and delivery answers in the customer workspace.</small></a>
+            <a class="help-link" href="/seller/" data-reveal><svg class="ic"><use href="#i-store"/></svg><b>Seller support</b><small>Raise a ticket with the Seller Hub support centre.</small></a>
+            <a class="help-link" href="/runner/" data-reveal><svg class="ic"><use href="#i-shield"/></svg><b>Partner safety</b><small>Report an incident from the Runner Portal safety centre.</small></a>
+            <a class="help-link" href="/about/#trust" data-reveal><svg class="ic"><use href="#i-lock"/></svg><b>Trust &amp; privacy</b><small>How sessions, demo data and verification are handled on NearBuy.</small></a>
+          </div>
+
+          <div class="support__card" id="enquiry" data-reveal>
+            <div class="support__card-head">
+              <span class="support__badge"><svg class="ic"><use href="#i-mail"/></svg></span>
+              <div>
+                <h3>Send an enquiry</h3>
+                <p>Four quick fields — every query lands in the operations inbox.</p>
+              </div>
+            </div>
+            <form class="support__form" id="enquiryForm" novalidate>
+              <p class="support__summary" id="enquirySummary" role="alert" hidden></p>
+              <div class="sfield" data-field="name">
+                <label for="enqName">Full name <span class="sfield__req" aria-hidden="true">*</span></label>
+                <input id="enqName" name="name" type="text" placeholder="Enter your full name" autocomplete="name" maxlength="60" aria-describedby="enqNameError" />
+                <p class="sfield__error" id="enqNameError" hidden></p>
+              </div>
+              <div class="sfield" data-field="contact">
+                <label for="enqContact">Mobile number / email ID <span class="sfield__req" aria-hidden="true">*</span></label>
+                <input id="enqContact" name="contact" type="text" placeholder="Enter your mobile number or email address" autocomplete="email" maxlength="80" aria-describedby="enqContactError" />
+                <p class="sfield__error" id="enqContactError" hidden></p>
+              </div>
+              <div class="sfield" data-field="topic">
+                <label for="enqTopic">Select a topic <span class="sfield__req" aria-hidden="true">*</span></label>
+                <div class="sfield__select">
+                  <select id="enqTopic" name="topic" aria-describedby="enqTopicError">
+                    <option value="" selected>Choose a topic</option>
+                    <option>General enquiry</option>
+                    <option>Order help</option>
+                    <option>Returns &amp; refunds</option>
+                    <option>Selling on NearBuy</option>
+                    <option>Delivery partner</option>
+                    <option>Payments</option>
+                    <option>Others</option>
+                  </select>
+                  <svg class="ic sfield__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+                </div>
+                <p class="sfield__error" id="enqTopicError" hidden></p>
+              </div>
+              <div class="sfield" data-field="message">
+                <label for="enqMessage">Your message <span class="sfield__req" aria-hidden="true">*</span></label>
+                <textarea id="enqMessage" name="message" rows="4" placeholder="Type your message here..." maxlength="600" aria-describedby="enqMessageError enqMessageCount"></textarea>
+                <div class="sfield__row">
+                  <p class="sfield__error" id="enqMessageError" hidden></p>
+                  <span class="sfield__count" id="enqMessageCount">0 / 600</span>
+                </div>
+              </div>
+              <button class="btn btn--primary btn--lg btn--block support__submit" type="submit">
+                Send query
+                <svg class="ic ic--arrow"><use href="#i-arrow" /></svg>
+              </button>
+              <p class="support__fineprint">
+                <svg class="ic"><use href="#i-lock" /></svg>
+                <span>Queries are saved to the NearBuy database and appear under <b>Enquiries</b> in the Admin Portal. No email provider is configured, so nothing is auto-forwarded.</span>
+              </p>
+            </form>
+            <div class="support__done" id="enquiryDone" hidden tabindex="-1" aria-live="polite">
+              <span class="support__done-icon" aria-hidden="true"><svg class="ic"><use href="#i-check" /></svg></span>
+              <h3>Thank you for contacting NearBuy!</h3>
+              <p>We’ve received your query and will get back to you.</p>
+              <p class="support__done-ref">Reference <b id="enquiryRef">—</b> · saved to the operations inbox</p>
+              <div class="support__done-actions">
+                <button class="btn btn--ghost btn--sm" type="button" id="enquiryAgain">Send another query</button>
+                <a class="btn btn--primary btn--sm" href="/">Back to home</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>`;
@@ -445,21 +512,21 @@ const CHECKLIST = [
     ],
   ],
   [
-    'Fleet coordination',
+    'Operator & coordinator view',
     'fleet',
     [
-      'Fleet overview with a live roster',
-      'Delivery team management',
-      'Work allocation across partners',
+      'Delivery roster for every locality',
+      'Partner workload at a glance',
+      'Work allocation across nearby partners',
       'Shift and availability planning',
-      'Performance reports',
+      'Performance reports per partner',
       'Account and safety settings',
-      'Zone coverage per fleet',
-      'Escalation of unassigned tasks',
-      'Onboarding partners into the fleet',
+      'Zone coverage per service area',
+      'Escalation of unassigned deliveries',
+      'Onboarding partners into the network',
       'Per-partner payout summary (demo)',
-      'Incident review within the fleet',
-      'Fleet-level support route',
+      'Incident review across the network',
+      'Coordinator-level support route',
     ],
   ],
   [
@@ -477,7 +544,7 @@ const CHECKLIST = [
       'Pricing bands configuration',
       'Safety and incidents register',
       'Audit log of staff actions',
-      'One shared data model behind five workspaces',
+      'One shared data model behind four workspaces',
       'Per-portal sign-in with isolated sessions',
       'Reduced-motion support across the site',
       'Responsive layouts down to small phones',
@@ -588,7 +655,7 @@ const PAGES = [
   {
     file: 'about/index.html',
     title: 'About NearBuy — the neighbourhood model',
-    desc: 'What NearBuy is, how the neighbourhood model works, the three portals on one backend, and the trust and prototype rules we hold ourselves to.',
+    desc: 'What NearBuy is, how the neighbourhood model works, the four portals on one backend, and the trust rules we hold ourselves to.',
     active: 'about',
     body: aboutBody
   },
