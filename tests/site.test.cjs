@@ -61,6 +61,15 @@ const PAGES = [
   '/about/',
   '/help/',
   '/roadmap/',
+  '/shops/',
+  '/categories/',
+  '/offers/',
+  '/how-it-works/',
+  '/sell/',
+  '/deliver/',
+  '/contact/',
+  '/policies/',
+  '/checklist/',
   '/delivery/kit.css',
   '/delivery/logo.svg',
   '/delivery/fonts/dm-sans-latin-wght-normal.woff2',
@@ -77,6 +86,20 @@ const ASSETS = [
   '/customer/views-cart.js',
   '/customer/views-orders.js',
   '/customer/views-account.js',
+  '/site.css',
+  '/site.js',
+  '/public/assets/site/hero-street.jpg',
+  '/public/assets/site/shopkeeper.jpg',
+  '/public/assets/site/courier.jpg',
+  '/public/assets/site/produce.jpg',
+  '/public/assets/site/bakery.jpg',
+  '/public/assets/site/pharmacy.jpg',
+  '/public/assets/site/parcels.jpg',
+  '/public/assets/fonts/fraunces-latin-wght-normal.woff2',
+  '/public/assets/fonts/fraunces-latin-wght-italic.woff2',
+  '/public/assets/fonts/dm-sans-latin-ext.woff2',
+  '/public/assets/fonts/noto-devanagari-400.woff2',
+  '/public/assets/fonts/noto-devanagari-700.woff2',
   '/home.css',
   '/home.js',
   '/public/assets/brand.css',
@@ -175,6 +198,15 @@ test('every asset referenced in the markup exists on disk', () => {
     'about/index.html',
     'help/index.html',
     'roadmap/index.html',
+    'shops/index.html',
+    'categories/index.html',
+    'offers/index.html',
+    'how-it-works/index.html',
+    'sell/index.html',
+    'deliver/index.html',
+    'contact/index.html',
+    'policies/index.html',
+    'checklist/index.html',
     'customer/index.html',
     'seller/index.html',
     'runner/index.html',
@@ -200,9 +232,36 @@ test('every asset referenced in the markup exists on disk', () => {
 });
 
 test('the public checklist keeps all 84 items', () => {
-  const src = fs.readFileSync(path.join(ROOT, 'roadmap', 'index.html'), 'utf8');
-  const items = (src.match(/class="rl-item"/g) || []).length;
-  assert.equal(items, 84, `expected 84 checklist items, found ${items}`);
+  for (const page of ['roadmap/index.html', 'checklist/index.html']) {
+    const src = fs.readFileSync(path.join(ROOT, page), 'utf8');
+    const items = (src.match(/class="rl-item"/g) || []).length;
+    assert.equal(items, 84, `expected 84 checklist items in ${page}, found ${items}`);
+  }
+});
+
+test('every public page is a website, not an app shell', () => {
+  const pages = [
+    'index.html', 'shops/index.html', 'categories/index.html', 'offers/index.html',
+    'how-it-works/index.html', 'sell/index.html', 'deliver/index.html', 'about/index.html',
+    'help/index.html', 'contact/index.html', 'policies/index.html', 'checklist/index.html'
+  ];
+  for (const f of pages) {
+    const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    assert.match(src, /<link rel="stylesheet" href="\/site\.css"/, `${f} should load the shared site stylesheet`);
+    assert.match(src, /<script src="\/site\.js"/, `${f} should load the shared site script`);
+    assert.match(src, /class="site-header"/, `${f} should carry the site header`);
+    assert.match(src, /class="site-footer"/, `${f} should carry the site footer`);
+    assert.match(src, /<h1[ >]/, `${f} should have one primary heading`);
+    assert.ok(!/class="bottom-nav"/.test(src), `${f} should not use an app bottom bar`);
+    assert.ok(!/lorem ipsum/i.test(src), `${f} should not contain placeholder copy`);
+  }
+});
+
+test('the new marketing pages are linked from the header and footer', () => {
+  const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  for (const href of ['/shops/', '/categories/', '/offers/', '/how-it-works/', '/sell/', '/deliver/', '/about/', '/help/', '/contact/', '/policies/', '/checklist/']) {
+    assert.ok(home.includes(`href="${href}"`), `homepage should link to ${href}`);
+  }
 });
 
 test('every HTML surface uses the universal logo and declares a favicon', () => {
@@ -211,6 +270,15 @@ test('every HTML surface uses the universal logo and declares a favicon', () => 
     'about/index.html',
     'help/index.html',
     'roadmap/index.html',
+    'shops/index.html',
+    'categories/index.html',
+    'offers/index.html',
+    'how-it-works/index.html',
+    'sell/index.html',
+    'deliver/index.html',
+    'contact/index.html',
+    'policies/index.html',
+    'checklist/index.html',
     'customer/index.html',
     'customer/login/index.html',
     'seller/index.html',

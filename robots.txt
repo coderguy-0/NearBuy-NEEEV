@@ -1,0 +1,10 @@
+# NearBuy — public website
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /seller/
+Disallow: /runner/
+Disallow: /customer/
+Disallow: /api/
+
+Sitemap: https://nearbuy.in/sitemap.xml

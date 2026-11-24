@@ -1,0 +1,116 @@
+[
+  {
+    "name": "Customer storefront",
+    "key": "shop",
+    "items": [
+      "Discover shops serviceable to your neighbourhood",
+      "Browse the full catalogue with category filters",
+      "Search products across every nearby shop",
+      "Product detail with price, stock and shop info",
+      "Save items to a wishlist",
+      "One basket across several shops",
+      "Quantity steppers with live line totals",
+      "Choose home delivery or store pickup per shop",
+      "Checkout with address and slot selection",
+      "Order confirmation with a reference code",
+      "Track order status through the lifecycle",
+      "Cancel an order before the shop accepts",
+      "Order history with invoices",
+      "Reorder from a past order",
+      "Account profile and saved addresses",
+      "Saved payment preferences (demo)",
+      "Help centre with FAQs and order help",
+      "Report an issue on an order"
+    ]
+  },
+  {
+    "name": "Seller hub",
+    "key": "sell",
+    "items": [
+      "Role-based seller sign-in",
+      "Seven-step seller registration wizard",
+      "Overview dashboard with KPIs",
+      "Order queue with accept and dispatch flow",
+      "Catalogue with categories, variants and images",
+      "Draft, submit and automated quality check",
+      "Bulk CSV catalogue upload",
+      "Per-SKU inventory with reservations",
+      "Low-stock thresholds and alerts",
+      "Stock movement history and warehouses",
+      "Delivery preparation with pickup PIN handover",
+      "Returns review, restock and refund",
+      "Payments ledger with fees and GST",
+      "Settlement statements with PDF and CSV export",
+      "Promotions with calculated price previews",
+      "Advertising campaign records",
+      "Business insights with CSV exports",
+      "Manage profile: business, locations and bank",
+      "Team and access with five enforced roles",
+      "Seller support tickets and academy"
+    ]
+  },
+  {
+    "name": "Delivery partner",
+    "key": "deliver",
+    "items": [
+      "Partner registration with an 18+ age gate",
+      "Document checks with masking",
+      "Emergency contact and safety briefing",
+      "Go online and offline at will",
+      "Delivery offers with distance and payout",
+      "Accept or decline offers",
+      "Active delivery with pickup and drop steps",
+      "Pickup PIN verification at the shop",
+      "Proof of delivery capture",
+      "Delivery history",
+      "Earnings summary and breakdown",
+      "Preferences: radius, categories, availability",
+      "Safety centre with incident reporting",
+      "Partner help and support",
+      "Operational limits for distance, weight and hours",
+      "Status updates that tolerate a dropped connection (demo)"
+    ]
+  },
+  {
+    "name": "Operator & coordinator view",
+    "key": "fleet",
+    "items": [
+      "Delivery roster for every locality",
+      "Partner workload at a glance",
+      "Work allocation across nearby partners",
+      "Shift and availability planning",
+      "Performance reports per partner",
+      "Account and safety settings",
+      "Zone coverage per service area",
+      "Escalation of unassigned deliveries",
+      "Onboarding partners into the network",
+      "Per-partner payout summary (demo)",
+      "Incident review across the network",
+      "Coordinator-level support route"
+    ]
+  },
+  {
+    "name": "Operations, trust & platform",
+    "key": "ops",
+    "items": [
+      "Operations gate behind an access code",
+      "Live overview of the neighbourhood network",
+      "Verifications queue for seller and partner applications",
+      "Profile change approvals",
+      "Enquiries inbox fed by the homepage form",
+      "Dispatch board for delivery tasks",
+      "Partner directory and status",
+      "Service areas and zones",
+      "Pricing bands configuration",
+      "Safety and incidents register",
+      "Audit log of staff actions",
+      "One shared data model behind four workspaces",
+      "Per-portal sign-in with isolated sessions",
+      "Reduced-motion support across the site",
+      "Responsive layouts down to small phones",
+      "Keyboard and shortcut support",
+      "Demo data labelling and reset",
+      "Prototype disclaimer surfaced on every portal"
+    ]
+  }
+]
