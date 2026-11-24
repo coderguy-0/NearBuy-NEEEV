@@ -3,25 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#06245e" />
-  <meta name="description" content="Quick routes into every NearBuy support surface, the eight most-asked questions, and the enquiry form for reaching the team." />
-  <title>Help & Support — NearBuy</title>
+  <meta name="theme-color" content="#031943" />
+  <title>Help centre — orders, delivery, refunds | NearBuy</title>
+  <meta name="description" content="Twelve live answers on NearBuy orders, delivery OTPs, store pickup, payments and refunds, plus routes into every support surface and a real enquiry form." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NearBuy" />
+  <meta property="og:title" content="Help centre — orders, delivery, refunds | NearBuy" />
+  <meta property="og:description" content="Twelve live answers on NearBuy orders, delivery OTPs, store pickup, payments and refunds, plus routes into every support surface and a real enquiry form." />
+  <meta property="og:image" content="/public/assets/site/hero-street.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://nearbuy.in/help/" />
   <link rel="icon" href="/public/assets/nearbuy-logo.png" />
   <link rel="preload" href="/delivery/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/home.css" />
+  <link rel="preload" href="/public/assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/site.css" />
   <link rel="stylesheet" href="/public/assets/brand.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "NearBuy",
+  "url": "https://nearbuy.in/help/",
+  "description": "Twelve live answers on NearBuy orders, delivery OTPs, store pickup, payments and refunds, plus routes into every support surface and a real enquiry form.",
+  "inLanguage": "en-IN",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://nearbuy.in/shops/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+  </script>
   <script>
     (function () {
       var d = document.documentElement;
       d.classList.add('js-ready');
       try {
         var pref = localStorage.getItem('nearbuy.motion');
-        if (pref === 'reduced' || (!pref && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        if (pref === '"reduced"' || pref === 'reduced' || (!pref && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
           d.setAttribute('data-motion', 'reduced');
         }
       } catch (e) {}
       setTimeout(function () {
-        if (!window.__nbHomeReady) d.classList.remove('js-ready');
+        if (!window.__nbSiteReady) d.classList.remove('js-ready');
       }, 2500);
     })();
   </script>
@@ -30,6 +53,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <svg class="sprite" aria-hidden="true" focusable="false">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M20 12H5"/><path d="m11 18-6-6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 7h12l1.2 12.7a1.2 1.2 0 0 1-1.2 1.3H6a1.2 1.2 0 0 1-1.2-1.3z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
     <symbol id="i-store" viewBox="0 0 24 24"><path d="M3.4 9.4 5 4h14l1.6 5.4"/><path d="M4 9.4h16V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M9.4 21v-5.6h5.2V21"/></symbol>
@@ -55,148 +79,339 @@
     <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2.4 9 5-9 5-9-5z"/><path d="m3 12.4 9 5 9-5"/><path d="m3 17.4 9 5 9-5"/></symbol>
     <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3.5 12.6 6.2 4.8A2 2 0 0 1 8.1 3.4h7.8a2 2 0 0 1 1.9 1.4l2.7 7.8"/><path d="M3.5 12.6h4.2l1.5 2.6h5.6l1.5-2.6h4.2V18a2.4 2.4 0 0 1-2.4 2.4H5.9A2.4 2.4 0 0 1 3.5 18z"/></symbol>
     <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><path d="M12 16.2v.1"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12.4V4h8.4l9.2 9.2-8.4 8.4z"/><circle cx="7.4" cy="7.4" r="1.3"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4 20c0-8 5-14 16-15 0 11-6 16-13 16"/><path d="M4 20c3-5 7-8 12-10"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24"><path d="M3 11.5 6 8l3 3 3-3 3 3 3-3 3 3.5-5.5 6-3-2.5-1.5 1.4-4-4z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10.5 9-7 9 7V21h-6v-6H9v6H3z"/></symbol>
   </svg>
-  <header class="nav" id="nav">
-    <div class="nav__inner">
-      <a class="brand" href="/" aria-label="NearBuy home">
-        <span class="brand__mark" aria-hidden="true"><img src="/public/assets/nearbuy-logo.png" width="42" height="42" alt="" decoding="async" /></span>
-        <span class="brand__word">Near<em>Buy</em></span>
-      </a>
-      <nav class="nav__links" aria-label="Primary">
-        <a href="/">Home</a>
-        <a href="/customer/#/shops">Explore shops</a>
-        <a href="/about/">About</a>
-        <a href="/roadmap/">Checklist</a>
-        <a href="/help/" aria-current="page">Help</a>
-        <a href="#enquiry">Contact</a>
-      </nav>
-      <div class="nav__actions">
-        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/demo/">
-          <svg class="ic"><use href="#i-layers"/></svg>
-          Try the demo
+
+  <header class="site-header">
+    <div class="header-strip">
+      <div class="header-strip__inner">
+        <a class="header-strip__loc" href="/shops/#directory" data-location-prompt>
+          <svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span>Delivering to</span><b data-location-label>Set your locality</b>
         </a>
-        <a class="btn btn--primary btn--sm" href="/customer/login/">Sign in</a>
-        <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
-          <svg class="ic"><use href="#i-menu"/></svg>
+        <div class="header-strip__links">
+          <span class="header-strip__note"><i class="header-strip__dot" aria-hidden="true"></i> 10 shops · 90 products live</span>
+          <a href="/demo/">Demo accounts</a>
+          <a href="/seller/">Seller Hub</a>
+          <a href="/runner/">Runner Portal</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-header__top">
+      <a class="brand" href="/" aria-label="NearBuy home">
+        <span class="brand__mark brand__mark--flat" aria-hidden="true"><svg viewBox="0 0 40 40" focusable="false">
+  <circle cx="20" cy="20" r="18.5" fill="#fff" stroke="#06245e" stroke-width="2.4" />
+  <path d="M20 5.5a11 11 0 0 1 11 11c0 6.6-8.1 14.3-10.2 16.1a1.2 1.2 0 0 1-1.6 0C17.1 30.8 9 23.1 9 16.5a11 11 0 0 1 11-11z" fill="#06245e" />
+  <path d="M13.6 12.6h12.8l1.5 4.2H12.1z" fill="#f47718" />
+  <path d="M13.8 16.8h12.4v3.4a1.4 1.4 0 0 1-1.4 1.4h-9.6a1.4 1.4 0 0 1-1.4-1.4z" fill="#fff" />
+  <rect x="17.4" y="18.2" width="2" height="2" rx=".4" fill="#06245e" />
+  <rect x="20.6" y="18.2" width="2" height="2" rx=".4" fill="#06245e" />
+  <path d="M19.9 21.6h1.4v3.1h-1.4z" fill="#06245e" />
+  <path d="M6 33.4c4.5-1.6 9.6-2.4 14-2.4s9.5.8 14 2.4" stroke="#f47718" stroke-width="2.2" stroke-linecap="round" fill="none" />
+</svg></span>
+        <span class="brand__text"><span class="brand__word">Near<em>Buy</em></span><span class="brand__tag">Shop local · Live better</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+        <li class="nav__item nav__item--has-panel">
+          <a class="nav__link" href="/shops/">Shop <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+          <div class="nav__panel nav__panel--wide">
+            <p class="nav__panel-head">Shop</p>
+            <a class="nav__panel-link" href="/shops/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-store"/></svg></span>
+              <span><b>Nearby shops</b><small>Ten verified shops across south Delhi</small></span>
+            </a>
+            <a class="nav__panel-link" href="/categories/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></span>
+              <span><b>Browse categories</b><small>Groceries, pharmacy, stationery and more</small></span>
+            </a>
+            <a class="nav__panel-link" href="/offers/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-tag"/></svg></span>
+              <span><b>Offers & coupons</b><small>Live codes from shops near you</small></span>
+            </a>
+            <a class="nav__panel-link" href="/customer/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg></span>
+              <span><b>Open the storefront</b><small>Cart, checkout and delivery OTP</small></span>
+            </a>
+          </div>
+        </li>
+        <li class="nav__item nav__item--has-panel">
+          <a class="nav__link" href="/how-it-works/">How it works <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+          <div class="nav__panel nav__panel--wide">
+            <p class="nav__panel-head">How it works</p>
+            <a class="nav__panel-link" href="/how-it-works/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></span>
+              <span><b>The neighbourhood model</b><small>Discovery, order, fulfilment and settlement</small></span>
+            </a>
+            <a class="nav__panel-link" href="/how-it-works/#delivery">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-truck"/></svg></span>
+              <span><b>Delivery & pickup</b><small>How a Runner job is accepted and handed over</small></span>
+            </a>
+            <a class="nav__panel-link" href="/how-it-works/#pricing">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-rupee"/></svg></span>
+              <span><b>Pricing & fees</b><small>Who pays what, and what the shop keeps</small></span>
+            </a>
+            <a class="nav__panel-link" href="/how-it-works/#faq">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-inbox"/></svg></span>
+              <span><b>Common questions</b><small>Answers straight from the live help centre</small></span>
+            </a>
+          </div>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="/sell/">Sell</a></li>
+        <li class="nav__item"><a class="nav__link" href="/deliver/">Deliver</a></li>
+        <li class="nav__item nav__item--has-panel">
+          <a class="nav__link" href="/about/">About <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+          <div class="nav__panel nav__panel--wide">
+            <p class="nav__panel-head">About</p>
+            <a class="nav__panel-link" href="/about/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></span>
+              <span><b>About NearBuy</b><small>Why distance is the feature</small></span>
+            </a>
+            <a class="nav__panel-link" href="/about/#trust">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span>
+              <span><b>Trust & safety</b><small>Sessions, PINs, OTPs and audit logs</small></span>
+            </a>
+            <a class="nav__panel-link" href="/checklist/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>
+              <span><b>Feature checklist</b><small>All 84 shipped capabilities, reviewable</small></span>
+            </a>
+          </div>
+        </li>
+        <li class="nav__item nav__item--has-panel">
+          <a class="nav__link" href="/help/" aria-current="page">Help <svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+          <div class="nav__panel nav__panel--wide">
+            <p class="nav__panel-head">Help</p>
+            <a class="nav__panel-link" href="/help/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-inbox"/></svg></span>
+              <span><b>Help centre</b><small>FAQs, policies and the support desk</small></span>
+            </a>
+            <a class="nav__panel-link" href="/contact/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span>
+              <span><b>Contact us</b><small>Write to the team, get a reference</small></span>
+            </a>
+            <a class="nav__panel-link" href="/policies/">
+              <span class="nav__panel-icon"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg></span>
+              <span><b>Privacy & terms</b><small>What we store and what we do not</small></span>
+            </a>
+          </div>
+        </li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-search" type="button" data-open-search aria-label="Search shops and products">
+          <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg> <span>Search</span>
+        </button>
+        <a class="header-tool" href="/customer/#/cart" aria-label="Your bag"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg> <span>Bag</span></a>
+        <a class="btn btn--ghost btn--sm header-cta header-cta--signin" href="/customer/login/">Sign in</a>
+        <a class="btn btn--primary btn--sm header-cta header-cta--shop" href="/shops/">Shop nearby</a>
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg>
         </button>
       </div>
     </div>
   </header>
+
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <div class="mobile-menu__scrim" data-close-menu></div>
+    <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Site menu">
+      <div class="mobile-menu__head">
+        <a class="brand" href="/" aria-label="NearBuy home">
+          <span class="brand__mark brand__mark--flat" aria-hidden="true"><svg viewBox="0 0 40 40" focusable="false">
+  <circle cx="20" cy="20" r="18.5" fill="#fff" stroke="#06245e" stroke-width="2.4" />
+  <path d="M20 5.5a11 11 0 0 1 11 11c0 6.6-8.1 14.3-10.2 16.1a1.2 1.2 0 0 1-1.6 0C17.1 30.8 9 23.1 9 16.5a11 11 0 0 1 11-11z" fill="#06245e" />
+  <path d="M13.6 12.6h12.8l1.5 4.2H12.1z" fill="#f47718" />
+  <path d="M13.8 16.8h12.4v3.4a1.4 1.4 0 0 1-1.4 1.4h-9.6a1.4 1.4 0 0 1-1.4-1.4z" fill="#fff" />
+  <rect x="17.4" y="18.2" width="2" height="2" rx=".4" fill="#06245e" />
+  <rect x="20.6" y="18.2" width="2" height="2" rx=".4" fill="#06245e" />
+  <path d="M19.9 21.6h1.4v3.1h-1.4z" fill="#06245e" />
+  <path d="M6 33.4c4.5-1.6 9.6-2.4 14-2.4s9.5.8 14 2.4" stroke="#f47718" stroke-width="2.2" stroke-linecap="round" fill="none" />
+</svg></span>
+          <span class="brand__text"><span class="brand__word">Near<em>Buy</em></span></span>
+        </a>
+        <button class="nav-toggle mobile-menu__close" type="button" data-close-menu aria-label="Close menu"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </div>
+      <div class="mobile-menu__body">
+        <div class="mobile-menu__group">
+          <p class="mobile-menu__label">Shop</p>
+          <a class="mobile-menu__link" href="/shops/"><svg class="ic" aria-hidden="true"><use href="#i-store"/></svg> Nearby shops</a>
+          <a class="mobile-menu__link" href="/categories/"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg> Categories</a>
+          <a class="mobile-menu__link" href="/offers/"><svg class="ic" aria-hidden="true"><use href="#i-tag"/></svg> Offers &amp; coupons</a>
+          <a class="mobile-menu__link" href="/customer/"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg> Storefront</a>
+        </div>
+        <div class="mobile-menu__group">
+          <p class="mobile-menu__label">Platform</p>
+          <a class="mobile-menu__link" href="/how-it-works/"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg> How NearBuy works</a>
+          <a class="mobile-menu__link" href="/sell/"><svg class="ic" aria-hidden="true"><use href="#i-store"/></svg> Sell on NearBuy</a>
+          <a class="mobile-menu__link" href="/deliver/"><svg class="ic" aria-hidden="true"><use href="#i-truck"/></svg> Deliver with Runner</a>
+        </div>
+        <div class="mobile-menu__group">
+          <p class="mobile-menu__label">Company</p>
+          <a class="mobile-menu__link" href="/about/"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg> About NearBuy</a>
+          <a class="mobile-menu__link" href="/checklist/"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Feature checklist</a>
+          <a class="mobile-menu__link" href="/demo/"><svg class="ic" aria-hidden="true"><use href="#i-sparkle"/></svg> Demo accounts</a>
+        </div>
+        <div class="mobile-menu__group">
+          <p class="mobile-menu__label">Help</p>
+          <a class="mobile-menu__link" href="/help/" aria-current="page"><svg class="ic" aria-hidden="true"><use href="#i-inbox"/></svg> Help centre</a>
+          <a class="mobile-menu__link" href="/contact/"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg> Contact us</a>
+          <a class="mobile-menu__link" href="/policies/"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg> Privacy &amp; terms</a>
+        </div>
+        <div class="mobile-menu__foot">
+          <a class="btn btn--primary btn--block" href="/shops/">Shop nearby</a>
+          <a class="btn btn--ghost btn--block" href="/customer/login/">Sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="search-dialog" id="siteSearch" hidden>
+    <div class="search-dialog__scrim" data-close-search></div>
+    <div class="search-dialog__panel" role="dialog" aria-modal="true" aria-label="Search NearBuy">
+      <form class="search-dialog__field" id="siteSearchForm" role="search">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+        <label class="sr-only" for="siteSearchInput">Search shops and products</label>
+        <input id="siteSearchInput" type="search" name="q" autocomplete="off" placeholder="Search milk, notebooks, medicine, shops…" />
+        <button class="search-dialog__close" type="button" data-close-search aria-label="Close search"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+      </form>
+      <div class="search-dialog__body" id="siteSearchBody"></div>
+      <div class="search-dialog__foot">
+        <span>Search runs against live shop stock and prices near you.</span>
+        <span><kbd>Esc</kbd> to close · <kbd>/</kbd> to search</span>
+      </div>
+    </div>
+  </div>
   <main id="main">
-    <section class="page-hero">
-      <div class="wrap page-hero__inner">
-        <span class="page-hero__crumb"><a href="/">Home</a> / Help</span>
-        <span class="eyebrow eyebrow--live">Help centre</span>
-        <h1>Help &amp; Support.</h1>
-        <p>Quick routes into every support surface, the questions people ask most, and a direct line to the team. In the product, each workspace also carries its own help: the storefront, the Seller Hub and the partner app all have a help centre with context-specific answers.</p>
-        <div class="page-hero__actions">
-          <a class="btn btn--primary" href="#enquiry">Send an enquiry <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+    <section class="page-head">
+      <div class="wrap page-head__inner">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Help</span></nav>
+        <h1>Help centre.</h1>
+        <p class="page-head__lede">Twelve answers straight from the live help records your storefront uses, routes into every support surface, and a form that writes to the operations inbox.</p>
+        <div class="page-head__actions">
+          <a class="btn btn--navy" href="#faq">Browse the FAQs <svg class="ic ic--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="btn btn--ghost" href="/customer/#/help">Open in-app help</a>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section section--tight" aria-labelledby="routesTitle">
       <div class="wrap">
-        <div class="section__head" data-reveal>
-          <span class="eyebrow">Quick links</span>
-          <h2>Jump straight to the right place.</h2>
-        </div>
-        <div class="help-links">
-          <a class="help-link" href="/customer/#/orders" data-reveal><svg class="ic"><use href="#i-box"/></svg><b>Track an order</b><small>Live status, courier and proof of delivery for every order you have placed.</small></a>
-          <a class="help-link" href="/seller/" data-reveal><svg class="ic"><use href="#i-store"/></svg><b>Seller support</b><small>Tickets, FAQs and the seller academy for running your shop.</small></a>
-          <a class="help-link" href="/runner/" data-reveal><svg class="ic"><use href="#i-shield"/></svg><b>Partner safety</b><small>Safety centre, incident reporting and operational limits for couriers.</small></a>
-          <a class="help-link" href="/#support" data-reveal><svg class="ic"><use href="#i-mail"/></svg><b>Report an issue</b><small>Send the team a query — four fields, saved to the operations inbox.</small></a>
+        <div class="section-head" data-reveal><span class="eyebrow">Quick links</span><h2 id="routesTitle">Jump straight to the right place.</h2></div>
+        <div class="card-grid card-grid--4" style="margin-top:32px">
+          <a class="help-link" href="/customer/#/orders" data-reveal><span class="shop-card__emoji" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-box"/></svg></span><b>Track an order</b><small>Live status, runner details and your delivery OTP.</small></a>
+          <a class="help-link" href="/customer/#/help" data-reveal><span class="shop-card__emoji" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-inbox"/></svg></span><b>Raise a ticket</b><small>Order-linked support threads, kept together with the order.</small></a>
+          <a class="help-link" href="/policies/#refunds" data-reveal><span class="shop-card__emoji" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg></span><b>Refunds &amp; returns</b><small>Windows, eligibility and how money comes back.</small></a>
+          <a class="help-link" href="/contact/" data-reveal><span class="shop-card__emoji" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg></span><b>Contact the team</b><small>A form with a reference code, reviewed by operations.</small></a>
         </div>
       </div>
     </section>
 
-    <section class="section section--cream" id="faq">
-      <div class="wrap faq-wrap">
-        <div class="faq-head" data-reveal>
-          <span class="eyebrow eyebrow--dark">Questions</span>
-          <h2>Eight things people ask.</h2>
-          <p>Need more? The in-app help centre goes deeper per workspace, or send us a question below.</p>
+    <section class="section section--cream" id="faq" aria-labelledby="faqTitle">
+      <div class="wrap faq-layout">
+        <div class="faq-layout__aside" data-reveal>
+          <span class="eyebrow">Answers</span>
+          <h2 id="faqTitle" style="font-size:clamp(26px,3vw,38px);margin-top:14px">12 things people ask.</h2>
+          <p class="muted mt-2">Grouped the way the storefront groups them. If an answer is missing, the form below reaches a person.</p>
+          <ul class="check-list">
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Orders <span style="color:var(--muted-2)">(2)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Delivery <span style="color:var(--muted-2)">(2)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Pickup <span style="color:var(--muted-2)">(1)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Payments <span style="color:var(--muted-2)">(1)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Refunds <span style="color:var(--muted-2)">(2)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Returns <span style="color:var(--muted-2)">(1)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Account <span style="color:var(--muted-2)">(2)</span></span></li>
+            <li><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-right"/></svg><span>Support <span style="color:var(--muted-2)">(1)</span></span></li>
+          </ul>
+          <a class="btn btn--ghost mt-3" href="#enquiry">Ask us directly</a>
         </div>
         <div class="faq" data-reveal>
-          <details class="faq__item" name="helpfaq" open>
-            <summary>What is NearBuy?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>NearBuy is a neighbourhood commerce platform that connects customers with local shops and short-distance delivery partners. It brings nearby stores, everyday products and Runner delivery together in one place.</p>
+          <details class="faq__item" name="faq" open>
+            <summary>How does delivery work?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Each shop fulfils its own part of your basket. Choose home delivery or store pickup per shop at checkout. Delivery fees, minimum order values and estimated times are set by each seller and shown before you pay.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>How do I find shops that deliver to me?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Open the customer storefront and choose your neighbourhood. Only shops that are serviceable to your address are shown, with distance, opening hours and what they sell.</p>
+          <details class="faq__item" name="faq">
+            <summary>Can I order from more than one shop?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Yes. Your basket is grouped by shop and becomes one parent order with a separate order for each shop. Sellers only ever see their own items and only ever receive their own share of the payment.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>Can I order from more than one shop at once?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Yes. Your basket holds items from several shops and splits into one order per shop at checkout, each with its own fulfilment method and tracking.</p>
+          <details class="faq__item" name="faq">
+            <summary>How do I know my order is nearby?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Open Orders → your order. Once a seller accepts and prepares it, the status timeline updates as the order is picked up and sent out for delivery. If a NearBuy runner is assigned, their name and status appear on the order page.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>How do I register my shop?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Use the seller registration route at /seller/register/ to work through a three-step application: account, business details, then KYC documents. The Admin Portal reviews every application, and selling unlocks once your shop is approved.</p>
+          <details class="faq__item" name="faq">
+            <summary>What is the delivery OTP for?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>For home delivery, the runner must enter the 6-digit code shown on your order page before the order can be marked delivered. Never share the code before you have the items.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>How do I become a delivery partner?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Send the application form at /runner/register/. It is stored in the platform database and reviewed by operations; once approved you sign in to the Runner Portal, go online and control your own availability.</p>
+          <details class="faq__item" name="faq">
+            <summary>How does store pickup work?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Choose Store pickup at checkout for a shop that offers it. You will get a collection code on your order page. Show it at the counter; the shop marks the order complete once it is handed over.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>What does delivery cost?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Delivery fees follow the pricing bands set for your service area and are shown before you confirm. Shops may offer free delivery above a basket value — the storefront labels those offers.</p>
+          <details class="faq__item" name="faq">
+            <summary>Which payment methods can I use?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Cash on delivery and pay at store work today. UPI, cards, net banking and wallets are enabled as soon as a payment gateway is configured for the deployment — the checkout says clearly when online payment is unavailable.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>How do refunds and returns work?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Raise an issue on an order from your account. The shop reviews it, can restock items and issue a refund; the ledger and settlement statement reflect the adjustment.</p>
+          <details class="faq__item" name="faq">
+            <summary>When will I get my refund?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Cancelled and approved return amounts are refunded to the original payment method. Cash-on-delivery refunds are recorded for a bank transfer or store credit arranged by the shop. A refund is only marked completed after the payment provider confirms it.</p>
           </details>
-          <details class="faq__item" name="helpfaq">
-            <summary>Is my data shared between portals?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>No. Customer, seller, delivery-partner and administrator sessions are separate cookies and isolated on the server. Signing in to one portal never grants access to another.</p>
+          <details class="faq__item" name="faq">
+            <summary>Can I cancel after ordering?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Yes, until the seller starts preparing the order. After that, contact support or request a return once the order is delivered. The cancel button on the order page only appears when cancellation is still possible.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary>What can I return?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Perishables such as milk, eggs and cut fruit are not returnable unless they arrive damaged. Packaged goods, stationery and household items can be returned within the return window shown on the product page.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary>Do I need an account to browse?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>No. You can browse shops, products and offers without signing in. An account is needed to save a wishlist, write reviews, or place and track an order.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary>How do I change my mobile number?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Open My Account → Profile. The new number must be verified with a one-time code before it replaces the old one.</p>
+          </details>
+          <details class="faq__item" name="faq">
+            <summary>How do I raise a complaint?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Open Help & Support, choose a category, and add your order number if relevant. You will get a ticket reference and can follow every reply in Help → My tickets.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <section class="section" id="support">
+    <section class="section" id="enquiry" aria-labelledby="enquiryTitle">
       <div class="wrap">
-        <div class="section__head section__head--split" data-reveal>
+        <div class="with-aside">
           <div>
-            <span class="eyebrow">Support routes</span>
-            <h2>Every way to reach us.</h2>
-          </div>
-          <p>The enquiry form lives on the homepage so it is always one tap from the front door. Every query is saved to the NearBuy database and appears in the Admin Portal under <strong>Enquiries</strong>, where the team can reply and close it.</p>
-        </div>
-        <div class="help-contact">
-          <div class="help-links">
-            <a class="help-link" href="/customer/#/help" data-reveal><svg class="ic"><use href="#i-bag"/></svg><b>Storefront help</b><small>Order, refund and delivery answers in the customer workspace.</small></a>
-            <a class="help-link" href="/seller/" data-reveal><svg class="ic"><use href="#i-store"/></svg><b>Seller support</b><small>Raise a ticket with the Seller Hub support centre.</small></a>
-            <a class="help-link" href="/runner/" data-reveal><svg class="ic"><use href="#i-shield"/></svg><b>Partner safety</b><small>Report an incident from the Runner Portal safety centre.</small></a>
-            <a class="help-link" href="/about/#trust" data-reveal><svg class="ic"><use href="#i-lock"/></svg><b>Trust &amp; privacy</b><small>How sessions, demo data and verification are handled on NearBuy.</small></a>
-          </div>
-
-          <div class="support__card" id="enquiry" data-reveal>
-            <div class="support__card-head">
-              <span class="support__badge"><svg class="ic"><use href="#i-mail"/></svg></span>
-              <div>
-                <h3>Send an enquiry</h3>
-                <p>Four quick fields — every query lands in the operations inbox.</p>
-              </div>
+            <div class="section-head" data-reveal>
+              <span class="eyebrow">Support desk</span>
+              <h2 id="enquiryTitle">Still stuck? Write to us.</h2>
+              <p>Every enquiry is stored in the NearBuy database and appears in the operations console with a reference code you can quote back to us.</p>
             </div>
-            <form class="support__form" id="enquiryForm" novalidate>
-              <p class="support__summary" id="enquirySummary" role="alert" hidden></p>
-              <div class="sfield" data-field="name">
-                <label for="enqName">Full name <span class="sfield__req" aria-hidden="true">*</span></label>
-                <input id="enqName" name="name" type="text" placeholder="Enter your full name" autocomplete="name" maxlength="60" aria-describedby="enqNameError" />
-                <p class="sfield__error" id="enqNameError" hidden></p>
-              </div>
-              <div class="sfield" data-field="contact">
-                <label for="enqContact">Mobile number / email ID <span class="sfield__req" aria-hidden="true">*</span></label>
-                <input id="enqContact" name="contact" type="text" placeholder="Enter your mobile number or email address" autocomplete="email" maxlength="80" aria-describedby="enqContactError" />
-                <p class="sfield__error" id="enqContactError" hidden></p>
-              </div>
-              <div class="sfield" data-field="topic">
-                <label for="enqTopic">Select a topic <span class="sfield__req" aria-hidden="true">*</span></label>
-                <div class="sfield__select">
-                  <select id="enqTopic" name="topic" aria-describedby="enqTopicError">
-                    <option value="" selected>Choose a topic</option>
+            <div class="form-card mt-3">
+              <form class="form-grid" data-enquiry-form novalidate>
+                <p class="form-status" data-form-status role="alert" hidden></p>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="helpName">Full name <span class="req" aria-hidden="true">*</span></label>
+                    <input id="helpName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="Your name" required />
+                    <p class="field__error" hidden></p>
+                  </div>
+                  <div class="field">
+                    <label for="helpContact">Mobile or email <span class="req" aria-hidden="true">*</span></label>
+                    <input id="helpContact" name="contact" type="text" autocomplete="email" maxlength="120" placeholder="you@example.com or 98xxxxxxxx" required />
+                    <p class="field__error" hidden></p>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="helpTopic">Topic <span class="req" aria-hidden="true">*</span></label>
+                  <select id="helpTopic" name="topic" required>
+                    <option value="">Choose a topic</option>
                     <option>General enquiry</option>
                     <option>Order help</option>
                     <option>Returns &amp; refunds</option>
@@ -205,99 +420,124 @@
                     <option>Payments</option>
                     <option>Others</option>
                   </select>
-                  <svg class="ic sfield__chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+                  <p class="field__error" hidden></p>
                 </div>
-                <p class="sfield__error" id="enqTopicError" hidden></p>
-              </div>
-              <div class="sfield" data-field="message">
-                <label for="enqMessage">Your message <span class="sfield__req" aria-hidden="true">*</span></label>
-                <textarea id="enqMessage" name="message" rows="4" placeholder="Type your message here..." maxlength="600" aria-describedby="enqMessageError enqMessageCount"></textarea>
-                <div class="sfield__row">
-                  <p class="sfield__error" id="enqMessageError" hidden></p>
-                  <span class="sfield__count" id="enqMessageCount">0 / 600</span>
+                <div class="field">
+                  <label for="helpMessage">Message <span class="req" aria-hidden="true">*</span></label>
+                  <textarea id="helpMessage" name="message" rows="6" maxlength="600" placeholder="Include your order code if you have one." required></textarea>
+                  <div style="display:flex;justify-content:space-between;gap:12px">
+                    <p class="field__error" hidden></p>
+                    <span class="field__count" data-count-for="message">0 / 600</span>
+                  </div>
                 </div>
-              </div>
-              <button class="btn btn--primary btn--lg btn--block support__submit" type="submit">
-                Send query
-                <svg class="ic ic--arrow"><use href="#i-arrow" /></svg>
-              </button>
-              <p class="support__fineprint">
-                <svg class="ic"><use href="#i-lock" /></svg>
-                <span>Queries are saved to the NearBuy database and appear under <b>Enquiries</b> in the Admin Portal. No email provider is configured, so nothing is auto-forwarded.</span>
-              </p>
-            </form>
-            <div class="support__done" id="enquiryDone" hidden tabindex="-1" aria-live="polite">
-              <span class="support__done-icon" aria-hidden="true"><svg class="ic"><use href="#i-check" /></svg></span>
-              <h3>Thank you for contacting NearBuy!</h3>
-              <p>We’ve received your query and will get back to you.</p>
-              <p class="support__done-ref">Reference <b id="enquiryRef">—</b> · saved to the operations inbox</p>
-              <div class="support__done-actions">
-                <button class="btn btn--ghost btn--sm" type="button" id="enquiryAgain">Send another query</button>
-                <a class="btn btn--primary btn--sm" href="/">Back to home</a>
+                <button class="btn btn--primary btn--lg" type="submit">Send to support <svg class="ic ic--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </form>
+            </div>
+            <div class="form-success mt-3" data-enquiry-success hidden tabindex="-1" aria-live="polite">
+              <span class="form-success__icon" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>
+              <h2>Thanks — we have it.</h2>
+              <p>Your query is stored under reference <span class="form-success__ref" data-enquiry-ref>—</span> and will be picked up in the operations console.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px">
+                <button class="btn btn--ghost btn--sm" type="button" data-enquiry-again>Send another query</button>
+                <a class="btn btn--primary btn--sm" href="/customer/#/help">Order help</a>
               </div>
             </div>
           </div>
+          <aside>
+            <div class="aside-card aside-card--sticky">
+              <h3>Support routes by role</h3>
+              <ul>
+                <li><a href="/customer/#/help">Customer storefront help</a></li>
+                <li><a href="/seller/">Seller Hub support centre</a></li>
+                <li><a href="/runner/">Runner safety centre</a></li>
+                <li><a href="/contact/">Contact the team directly</a></li>
+              </ul>
+              <hr style="margin:16px 0;border-color:var(--line-soft)" />
+              <h3>Contact</h3>
+              <p class="mt-1">011 4106 2200<br>Mon–Sat, 9:00–20:00 IST<br><a href="mailto:hello@nearbuy.in" style="color:var(--action)">hello@nearbuy.in</a></p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
+
   </main>
-  <footer class="footer">
-    <div class="wrap footer__inner">
-      <div class="footer__brand">
+  <footer class="site-footer">
+    <div class="wrap site-footer__top">
+      <div class="site-footer__brand">
         <a class="brand" href="/" aria-label="NearBuy home">
-          <span class="brand__mark" aria-hidden="true">
-            <img src="/public/assets/nearbuy-logo.png" width="48" height="48" alt="" loading="lazy" decoding="async" />
-          </span>
-          <span class="brand__word">Near<em>Buy</em></span>
+          <span class="brand__mark brand__mark--flat" aria-hidden="true"><svg viewBox="0 0 40 40" focusable="false">
+  <circle cx="20" cy="20" r="18.5" fill="#fff" stroke="#06245e" stroke-width="2.4" />
+  <path d="M20 5.5a11 11 0 0 1 11 11c0 6.6-8.1 14.3-10.2 16.1a1.2 1.2 0 0 1-1.6 0C17.1 30.8 9 23.1 9 16.5a11 11 0 0 1 11-11z" fill="#06245e" />
+  <path d="M13.6 12.6h12.8l1.5 4.2H12.1z" fill="#f47718" />
+  <path d="M13.8 16.8h12.4v3.4a1.4 1.4 0 0 1-1.4 1.4h-9.6a1.4 1.4 0 0 1-1.4-1.4z" fill="#fff" />
+  <rect x="17.4" y="18.2" width="2" height="2" rx=".4" fill="#06245e" />
+  <rect x="20.6" y="18.2" width="2" height="2" rx=".4" fill="#06245e" />
+  <path d="M19.9 21.6h1.4v3.1h-1.4z" fill="#06245e" />
+  <path d="M6 33.4c4.5-1.6 9.6-2.4 14-2.4s9.5.8 14 2.4" stroke="#f47718" stroke-width="2.2" stroke-linecap="round" fill="none" />
+</svg></span>
+          <span class="brand__text"><span class="brand__word">Near<em>Buy</em></span><span class="brand__tag">Shop local · Live better</span></span>
         </a>
-        <p class="footer__tagline">Your neighbourhood.<br />Everything you need.</p>
-        <p class="footer__meta">Hauz Khas · New Delhi<br />hello@nearbuy.in</p>
-        <div class="footer__social" role="group" aria-label="NearBuy channels">
-          <a href="/help/#enquiry" aria-label="Email support"><svg class="ic"><use href="#i-mail"/></svg></a>
-          <a href="/help/#support" aria-label="Support routes"><svg class="ic"><use href="#i-phone"/></svg></a>
-          <a href="/about/#trust" aria-label="Trust and safety"><svg class="ic"><use href="#i-shield"/></svg></a>
-        </div>
+        <p class="site-footer__tagline">Your neighbourhood.<br>Everything you need.</p>
+        <p class="site-footer__meta">Hauz Khas, New Delhi 110016<br><a href="mailto:hello@nearbuy.in">hello@nearbuy.in</a> · 011 4106 2200<br>Mon–Sat, 9:00–20:00 IST</p>
       </div>
-      <div class="footer__cols">
+      <div class="site-footer__cols">
         <div>
-          <h4>Shop</h4>
-          <a href="/customer/">Storefront</a>
-          <a href="/customer/#/shops">Nearby shops</a>
-          <a href="/customer/#/products">Browse everything</a>
-          <a href="/customer/#/offers">Offers &amp; coupons</a>
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="/shops/">Nearby shops</a></li>
+            <li><a href="/categories/">Categories</a></li>
+            <li><a href="/offers/">Offers &amp; coupons</a></li>
+            <li><a href="/customer/">Storefront</a></li>
+            <li><a href="/customer/#/orders">Track an order</a></li>
+          </ul>
         </div>
         <div>
-          <h4>Portals</h4>
-          <a href="/seller/">Seller Hub</a>
-          <a href="/runner/">Delivery partner</a>
-          <a href="/admin/">Admin Portal</a>
-          <a href="/demo/">Demo accounts</a>
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="/how-it-works/">How NearBuy works</a></li>
+            <li><a href="/sell/">Sell on NearBuy</a></li>
+            <li><a href="/deliver/">Deliver with Runner</a></li>
+            <li><a href="/seller/">Seller Hub</a></li>
+            <li><a href="/runner/">Runner Portal</a></li>
+          </ul>
         </div>
         <div>
-          <h4>Company</h4>
-          <a href="/about/">About NearBuy</a>
-          <a href="/roadmap/">Feature checklist</a>
-          <a href="/seller/register/">Register a shop</a>
-          <a href="/runner/register/">Deliver with us</a>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="/about/">About NearBuy</a></li>
+            <li><a href="/about/#trust">Trust &amp; safety</a></li>
+            <li><a href="/checklist/">Feature checklist</a></li>
+            <li><a href="/demo/">Demo accounts</a></li>
+            <li><a href="/admin/">Operations console</a></li>
+          </ul>
         </div>
         <div>
-          <h4>Help</h4>
-          <a href="/help/">Help centre</a>
-          <a href="/help/#faq">FAQs</a>
-          <a href="/help/#enquiry">Send an enquiry</a>
-          <a href="/customer/#/help">Order &amp; refund help</a>
-          <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
-            <span class="footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
-          </button>
+          <h3>Help</h3>
+          <ul>
+            <li><a href="/help/">Help centre</a></li>
+            <li><a href="/contact/">Contact us</a></li>
+            <li><a href="/policies/">Privacy &amp; terms</a></li>
+            <li><a href="/policies/#refunds">Refund policy</a></li>
+            <li><a href="/customer/#/help">Order help</a></li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="wrap footer__bottom">
-      <span>© <span id="year">2026</span> NearBuy. All rights reserved.</span>
-      <span class="footer__disclaimer">Demo dataset · no live payment, dispatch or identity provider connected.</span>
-      <a href="/about/#trust" class="footer__admin">Privacy, terms &amp; refunds</a>
+    <div class="wrap site-footer__bottom">
+      <span>© <span id="year">2026</span> NearBuy. Built in Delhi for the shops around the corner.</span>
+      <div class="site-footer__bottom-links">
+        <a href="/policies/">Privacy</a>
+        <a href="/policies/#terms">Terms</a>
+        <a href="/policies/#refunds">Refunds</a>
+        <a href="/contact/">Contact</a>
+        <button class="site-footer__motion" id="motionToggle" type="button" aria-pressed="false">
+          <span class="site-footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
+        </button>
+      </div>
     </div>
   </footer>
-  <script src="/home.js"></script>
+  <div id="toasts" class="toast-stack" role="status" aria-live="polite"></div>
+  <script src="/site.js"></script>
 </body>
 </html>
