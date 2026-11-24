@@ -116,8 +116,9 @@ customer's OTP, and cannot pick up without the seller's PIN.
 
 Platform overview · orders across all shops · customers (suspend / reactivate, which kills live sessions) · shops
 (verify, open/closed, radius, service PINs) · catalogue moderation (hide a listing from the storefront) · deliveries ·
-returns and refund status · support tickets and review moderation · coupons, banners and broadcasts · service areas,
-seller/delivery applications and the audit log. Every administrative action is written to `nb_audit_logs`.
+returns and refund status · **seller applications** (documents, decision and reason — approving unlocks selling) ·
+support tickets, contact enquiries and review moderation · coupons, banners and broadcasts · service areas and the
+audit log. Every administrative action is written to `nb_audit_logs`.
 
 ## What is real, and what still needs a provider
 

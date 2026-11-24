@@ -16,6 +16,7 @@
     { href: '#/deliveries', label: 'Deliveries', icon: 'bike' },
     { href: '#/runners', label: 'Runners & payouts', icon: 'route' },
     { href: '#/returns', label: 'Returns & refunds', icon: 'rotate' },
+    { href: '#/applications', label: 'Seller applications', icon: 'scroll' },
     { href: '#/support', label: 'Support & reviews', icon: 'ticket' },
     { href: '#/marketing', label: 'Marketing', icon: 'tag' },
     { href: '#/platform', label: 'Service areas & audit', icon: 'map' }
@@ -427,6 +428,91 @@
   }
 
   /* ------------------------------------------------------------- marketing */
+  /* ---------------------------------------------------------- applications */
+  async function applications(match, ctx) {
+    const data = await PA.api('GET', '/seller-applications');
+    if (!ctx.isCurrent()) return;
+    const rows = data.applications || [];
+    const pending = rows.filter((a) => ['submitted', 'under_review', 'additional_info_required', 'documents_pending'].includes(a.status));
+    const decided = rows.filter((a) => !pending.includes(a));
+    const docLine = (a) => a.documents.length
+      ? a.documents.map((d) => `${esc(d.type.replace(/_/g, ' '))}${d.fileName ? ' · ' + esc(d.fileName) : ''}`).join('<br />')
+      : '<span class="muted">No documents attached</span>';
+    const row = (a) => `<tr>
+      <td class="small"><b>${esc((a.shop && a.shop.name) || a.legalName || 'Unnamed shop')}</b>
+        <div class="muted small">${esc(a.businessCategory || '—')} · ${esc(a.shopType || '—')} · ${esc(a.city || '')} ${esc(a.pincode || '')}</div></td>
+      <td class="small">${esc(a.owner.name)}<div class="muted small">${esc(a.owner.email)}${a.owner.phone ? ' · ' + esc(a.owner.phone) : ''}</div></td>
+      <td class="small">${docLine(a)}</td>
+      <td class="small">${a.submittedAt ? PA.dateTime(a.submittedAt) : 'Draft — not submitted'}
+        <div class="muted small">${a.reviewedAt ? 'Reviewed ' + PA.dateTime(a.reviewedAt) : 'Not reviewed yet'}</div></td>
+      <td>${PA.status(a.status)}${a.reason ? `<div class="muted small">${esc(a.reason)}</div>` : ''}</td>
+      <td class="right"><button class="btn btn-sm" data-app="${esc(a.id)}">Review</button></td>
+    </tr>`;
+
+    PA.set(`
+      <div class="space-between"><div><h1>Seller applications</h1>
+        <p class="muted small">Every shop that applied to sell on NearBuy. Approving unlocks selling; the shop's radius and service PINs are set in <a href="#/shops">Shops</a>.</p></div>
+        <a class="btn" href="#/shops">${PA.icon('shop')} Verified shops</a></div>
+
+      <div class="kpi-grid">
+        <div class="kpi amber"><span class="label">Awaiting review</span><span class="value">${pending.length}</span><span class="hint">Submitted, not decided</span></div>
+        <div class="kpi green"><span class="label">Approved</span><span class="value">${rows.filter((a) => a.status === 'approved').length}</span><span class="hint">Selling enabled</span></div>
+        <div class="kpi red"><span class="label">Rejected / suspended</span><span class="value">${rows.filter((a) => ['rejected', 'suspended'].includes(a.status)).length}</span><span class="hint">Reason recorded</span></div>
+        <div class="kpi"><span class="label">Total applications</span><span class="value">${rows.length}</span><span class="hint">All time</span></div>
+      </div>
+
+      <div class="card flush">
+        <div class="card-head"><h2>Awaiting a decision</h2><span class="spacer"></span><span class="muted small">${pending.length}</span></div>
+        ${table(['Shop', 'Owner', 'Documents', 'Submitted', 'Status', ''], pending.map(row),
+          '<div class="card-body muted small">Nothing waiting. New seller applications appear here as soon as they are submitted.</div>')}
+      </div>
+
+      <div class="card flush">
+        <div class="card-head"><h2>Decided applications</h2><span class="spacer"></span><span class="muted small">${decided.length}</span></div>
+        ${table(['Shop', 'Owner', 'Documents', 'Submitted', 'Status', ''], decided.map(row),
+          '<div class="card-body muted small">No decisions recorded yet.</div>')}
+      </div>
+    `);
+
+    PA.onAll('[data-app]', 'click', (e) => {
+      const app = rows.find((a) => a.id === e.currentTarget.dataset.app);
+      if (!app) return;
+      PA.modal({
+        title: 'Review ' + ((app.shop && app.shop.name) || app.legalName || 'application'),
+        wide: true,
+        body: `<div class="grid g2 small">
+            <div><b>Owner</b><div class="muted">${esc(app.owner.name)} · ${esc(app.owner.email)}</div></div>
+            <div><b>Contact</b><div class="muted">${esc(app.contactNumber || '—')} · ${esc(app.businessEmail || '—')}</div></div>
+            <div><b>Legal name</b><div class="muted">${esc(app.legalName || '—')}</div></div>
+            <div><b>Ownership</b><div class="muted">${esc(app.ownershipType || '—')}</div></div>
+            <div><b>Address</b><div class="muted">${esc(app.address || '—')}, ${esc(app.city || '')} ${esc(app.state || '')} ${esc(app.pincode || '')}</div></div>
+            <div><b>PAN / GST</b><div class="muted">${esc(app.pan || '—')} · ${esc(app.gst || '—')}</div></div>
+          </div>
+          <div class="small"><b>Documents</b><div class="muted">${docLine(app)}</div></div>
+          <div class="field"><label for="app-status">Decision</label>
+            <select class="select" id="app-status">
+              ${['under_review', 'approved', 'rejected', 'additional_info_required', 'suspended'].map((st) => `<option value="${st}"${st === app.status ? ' selected' : ''}>${st.replace(/_/g, ' ')}</option>`).join('')}
+            </select></div>
+          <div class="field"><label for="app-reason">Reason (required for a rejection or more information)</label>
+            <textarea class="textarea" id="app-reason" placeholder="What does the seller need to fix?">${esc(app.reason || '')}</textarea></div>
+          <p class="muted small">Approving makes the shop public and able to receive orders. The seller is notified in the Seller Hub and the decision is written to the audit log.</p>`,
+        actions: [{ label: 'Cancel' }, {
+          label: 'Save decision', primary: true, onClick: async (back) => {
+            const status = back.querySelector('#app-status').value;
+            const reason = back.querySelector('#app-reason').value.trim();
+            if ((status === 'rejected' || status === 'additional_info_required') && reason.length < 4) {
+              PA.toast('Give the seller a reason for this decision.', 'err');
+              return true;
+            }
+            const res = await PA.api('PATCH', `/seller-applications/${encodeURIComponent(app.id)}`, { status, reason: reason || undefined });
+            PA.toast(res.message || 'Application updated.');
+            PA.render();
+          }
+        }]
+      });
+    });
+  }
+
   async function marketing(match, ctx) {
     const [coupons, banners] = await Promise.all([PA.api('GET', '/coupons'), PA.api('GET', '/banners')]);
     const shops = await PA.api('GET', '/shops');
@@ -745,6 +831,7 @@
       [/^\/deliveries$/, deliveries],
       [/^\/runners$/, runners],
       [/^\/returns$/, returns],
+      [/^\/applications$/, applications],
       [/^\/support$/, support],
       [/^\/marketing$/, marketing],
       [/^\/platform$/, platform]

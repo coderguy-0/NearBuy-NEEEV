@@ -314,9 +314,8 @@
             ? `<span class="promo-strip__item promo-strip__demo">${NB.icon('info')} Demo environment · sample shops, products and orders</span>`
             : `<span class="promo-strip__item hide-sm">${NB.icon('truck')} Delivery or pickup — set by each shop</span>`}
           <nav class="promo-strip__links" aria-label="Secondary">
+            <a href="/about/">About NearBuy</a>
             <a href="#/help">Help &amp; Support</a>
-            
-            
           </nav>
         </div>
       </div>
@@ -379,12 +378,41 @@
               <a class="brand brand--light" href="#/">${LOGO}</a>
               <p>Shop Local. Live Better. NearBuy connects you with trusted neighbourhood shops — compare prices, order easily and track every delivery.</p>
               <div class="footer-tagline">Smart Shopping. Right Nearby.</div>
-              
             </div>
-
-
-
-
+            <div class="footer-col">
+              <h3>Shop</h3>
+              <a href="#/shops">Nearby shops</a>
+              <a href="#/products">Everything nearby</a>
+              <a href="#/categories">All categories</a>
+              <a href="#/offers">Offers &amp; coupons</a>
+            </div>
+            <div class="footer-col">
+              <h3>Your account</h3>
+              <a href="#/orders">Orders &amp; tracking</a>
+              <a href="#/wishlist">Wishlist</a>
+              <a href="#/account/addresses">Saved addresses</a>
+              <a href="#/account/returns">Returns &amp; refunds</a>
+            </div>
+            <div class="footer-col">
+              <h3>Help</h3>
+              <a href="#/help">Help centre</a>
+              <a href="#/help/tickets">Support tickets</a>
+              <a href="#/page/delivery">Delivery information</a>
+              <a href="#/page/returns">Return &amp; refund policy</a>
+            </div>
+            <div class="footer-col">
+              <h3>NearBuy</h3>
+              <a href="/about/">About the platform</a>
+              <a href="/help/">Public help centre</a>
+              <a href="/roadmap/">Feature checklist</a>
+            </div>
+            <div class="footer-col">
+              <h3>Small print</h3>
+              <a href="#/page/about">Why local matters</a>
+              <a href="#/page/privacy">Privacy policy</a>
+              <a href="#/page/terms">Terms &amp; conditions</a>
+              <a href="#/page/cancellation">Cancellation policy</a>
+            </div>
           </div>
           <div class="footer-bottom">
             <span>© ${new Date().getFullYear()} NearBuy. A neighbourhood commerce prototype. <b>Demo data</b> is labelled throughout.</span>
@@ -1170,6 +1198,30 @@
     </div></div>`;
 
   /* ----------------------------- router ----------------------------- */
+  /* ------------------------- connection state ------------------------ */
+  /* Every request fails with a generic error when the browser is offline.
+     Show one persistent, non-blocking banner and refresh the view when the
+     connection returns so the customer is never staring at stale data. */
+  let offlineEl = null;
+  NB.setOffline = (offline) => {
+    if (offline) {
+      if (offlineEl) return;
+      offlineEl = document.createElement('div');
+      offlineEl.className = 'offline-banner';
+      offlineEl.setAttribute('role', 'status');
+      offlineEl.setAttribute('aria-live', 'polite');
+      offlineEl.innerHTML = `<b>You are offline.</b> Browsing may be limited until the connection returns.`;
+      document.body.appendChild(offlineEl);
+    } else if (offlineEl) {
+      offlineEl.remove();
+      offlineEl = null;
+      NB.render();
+    }
+  };
+  window.addEventListener('offline', () => NB.setOffline(true));
+  window.addEventListener('online', () => NB.setOffline(false));
+  window.addEventListener('load', () => { if (navigator.onLine === false) NB.setOffline(true); });
+
   NB.routes = [];
   NB.view = (pattern, view) => { NB.routes.push({ pattern, view }); };
 

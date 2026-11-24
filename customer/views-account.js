@@ -642,6 +642,9 @@
 
   NB.view(/^\/help$/, async (m, query) => {
     const orderCode = query.get('order') || '';
+    /* ?tab=tickets deep-links straight to the ticket desk so the footer and
+       in-app links land on the right panel instead of the top of the page. */
+    const focusTickets = query.get('tab') === 'tickets';
     const { faqs } = await NB.api('/faqs');
     const faqCats = [...new Set(faqs.map((f) => f.category))];
     const html = `
@@ -778,6 +781,17 @@
             ok.innerHTML = `<p>${NB.icon('checkCircle')} ${NB.esc(res.message)}</p><b>${NB.esc(res.code)}</b>`;
           } catch (e2) { err.textContent = e2.message; err.hidden = false; }
         });
+
+        if (focusTickets) {
+          const panel = NB.$('#ticketPanel', root);
+          if (panel) {
+            panel.scrollIntoView({ block: 'start', behavior: 'smooth' });
+            const firstField = panel.querySelector('input, select, textarea, a.btn');
+            /* The router focuses #view after this hook, so queue the field focus
+               to land once the page-level focus has been applied. */
+            if (firstField) setTimeout(() => firstField.focus({ preventScroll: true }), 0);
+          }
+        }
       }
     };
   });
