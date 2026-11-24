@@ -409,3 +409,15 @@ input[type='checkbox'].switch:checked::after { left: 21px; }
 @media (max-width: 720px) {
   .pack-row { grid-template-columns: minmax(0, 1fr) 90px; }
 }
+
+/* ----------------------------------------------------------- connection */
+.offline-banner {
+  position: fixed; left: 50%; transform: translateX(-50%); top: 10px; z-index: 300;
+  width: min(560px, calc(100vw - 24px));
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 11px;
+  background: #3A2A05; color: #FFE9BE; border: 1px solid #8A6A18;
+  font-size: 13px; box-shadow: var(--shadow-lg);
+}
+.offline-banner b { color: #fff; font-weight: 800; }
+@media (max-width: 520px) { .offline-banner { top: auto; bottom: 12px; } }
