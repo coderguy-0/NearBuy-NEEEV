@@ -1,0 +1,86 @@
+/* NearBuy universal identity — supplied navy/orange shopping badge.
+   Keep operational success/warning/error colours separate from brand colours. */
+:root {
+  --brand-navy: #06245e;
+  --brand-navy-deep: #031943;
+  --brand-orange: #ff7900;
+  --brand-action: #ad4700; /* Accessible white-label action colour. */
+  --brand-tint: #fff4e8;
+  --navy: var(--brand-navy);
+  --deep: var(--brand-navy-deep);
+  --navy-deep: var(--brand-navy-deep);
+  --navy2: var(--brand-navy-deep);
+  --night: var(--brand-navy-deep);
+  --navy-soft: #153d7d;
+  --navy-900: #031943;
+  --navy-850: #062052;
+  --navy-800: #06245e;
+  --navy-700: #103878;
+  --navy-600: #21498a;
+  --orange: var(--brand-orange);
+  --orange-light: #ffac54;
+  --orange-deep: var(--brand-action);
+  --orange-soft: var(--brand-tint);
+  --blue: var(--brand-navy);
+  --blue-deep: var(--brand-navy-deep);
+  --blue-soft: #edf2fc;
+  --bright: #25559b;
+  --ink: #102649;
+  --ink-2: #19345b;
+  --text: #263b59;
+  --cream: #fffcf8;
+  --cream-2: #fff4e8;
+  --fog: #fff7ee;
+  --tint: #f7f8fc;
+  --paper: #fffcf8;
+  --accent: var(--brand-action);
+  --accent-ink: #973e00;
+  --accent-soft: var(--brand-tint);
+}
+/* Every supplied badge is contained, never cropped or recoloured. The white
+   disc also preserves the navy artwork's contrast in dark navigation. */
+img[src*="nearbuy-logo.png"] {
+  object-fit: contain;
+  background: #fff;
+  border-radius: 50%;
+  flex-shrink: 0;
+  filter: none;
+}
+body[data-surface] {
+  --accent: var(--brand-action);
+  --accent-ink: #973e00;
+  --accent-soft: var(--brand-tint);
+}
+.btn--primary, .btn-primary, .seller-btn.primary, .network-btn.primary {
+  background: var(--brand-action);
+  border-color: var(--brand-action);
+  color: #fff;
+  box-shadow: 0 6px 18px rgb(173 71 0 / 16%);
+}
+.btn--primary:hover, .btn-primary:hover, .seller-btn.primary:hover, .network-btn.primary:hover {
+  background: #8f3a00;
+  border-color: #8f3a00;
+  color: #fff;
+}
+:focus-visible { outline-color: var(--brand-orange); }
+/* Customer marketplace: navy foundation, orange highlights. */
+.hero__copy h1 em { color: #ffac54; }
+.hero__copy .eyebrow { color: #ffce99; }
+.site-header { border-top: 3px solid var(--brand-orange); }
+.side .nav a.active, .side .nav a[aria-current="page"] {
+  box-shadow: inset 3px 0 var(--brand-orange);
+}
+/* Demo launcher shares the same identity as the live portals. */
+.cards strong, .eyebrow, .number { color: var(--brand-action); }
+.cards button:hover:not(:disabled) { border-color: var(--brand-orange); }
+header a { color: var(--brand-navy); }
+/* Keep the marketplace hero in the badge's deep blue rather than electric blue. */
+.promo-hero .hero {
+  background: radial-gradient(ellipse at 90% 0%, #154586 0%, transparent 60%),
+    linear-gradient(118deg, var(--brand-navy-deep), var(--brand-navy));
+}
+.promo-hero .hero::after { background: rgb(255 121 0 / 12%); }
+/* Footers are deliberately informational; navigation lives in the header/sidebar. */
+.footer__inner, .footer-top { grid-template-columns: minmax(0, 1fr); }
+.footer__brand, .footer-brand { max-width: 620px; }
+.footer__motion { margin: 0 max(24px, calc((100% - 1200px) / 2)) 24px; }

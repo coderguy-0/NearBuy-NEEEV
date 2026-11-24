@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#06245e" />
+<meta name="description" content="Apply to deliver with NearBuy. Applications are reviewed by platform operations before offers are sent." />
+<title>Delivery partner registration · NearBuy</title>
+<link rel="icon" href="/public/assets/nearbuy-logo.png" />
+<link rel="stylesheet" href="/partner/app.css" />
+<link rel="stylesheet" href="/public/assets/brand.css" />
+</head>
+<body>
+<main class="content" style="max-width:820px;margin:0 auto;padding:28px 18px 60px">
+  <div class="row" style="margin-bottom:18px">
+    <img src="/public/assets/nearbuy-logo.png" alt="NearBuy" width="44" height="44" style="border-radius:12px;background:#fff" />
+    <div><b style="font-size:19px;color:var(--deep)">NearBuy</b>
+      <div class="small muted">Shop Local. Live Better.</div></div>
+    <span class="spacer" style="flex:1"></span>
+    <a class="btn btn-sm" href="/runner/">Partner sign-in</a>
+  </div>
+
+  <div class="card">
+    <div class="small strong" style="letter-spacing:.12em;text-transform:uppercase;color:var(--blue)">Delivery partner</div>
+    <h1 style="margin:6px 0 6px">Deliver for your neighbourhood</h1>
+    <p class="muted">One delivery at a time, a shop handover PIN at pickup and the customer's OTP at the door. Applications are stored
+      in the NearBuy database and reviewed in the Admin Portal before any offer is sent.</p>
+
+    <form id="apply" class="stack" novalidate style="margin-top:16px">
+      <div class="grid g2">
+        <div class="field"><label for="name">Your name</label><input class="input" id="name" required minlength="2" autocomplete="name" /></div>
+        <div class="field"><label for="contact">Email or mobile</label><input class="input" id="contact" required minlength="5" autocomplete="email" /></div>
+        <div class="field"><label for="vehicle">Vehicle</label>
+          <select class="select" id="vehicle"><option>Scooter</option><option>Motorcycle</option><option>Bicycle</option><option>On foot</option></select></div>
+        <div class="field"><label for="locality">Locality and PIN code</label><input class="input" id="locality" required placeholder="Green Park, 110016" /></div>
+      </div>
+      <div class="field"><label for="message">When can you ride, and how far will you go?</label>
+        <textarea class="textarea" id="message" required minlength="10" placeholder="Weekends and evenings, up to 8 km from home."></textarea></div>
+      <div class="form-error hidden" id="err" role="alert"></div>
+      <div class="row"><button class="btn btn-primary" type="submit" id="submit">Send application</button>
+        <span class="muted small">Do not upload identity documents to this prototype.</span></div>
+    </form>
+
+    <div id="done" class="hidden" style="margin-top:16px">
+      <div class="banner-note info" id="done-text" role="status"></div>
+      <div class="row" style="margin-top:12px">
+        <a class="btn btn-primary" href="/customer/">Browse the storefront</a>
+        <a class="btn" href="/">Back to NearBuy home</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Already delivering here?</h3>
+    <p class="muted small">Demo partners can sign in at <a href="/runner/">the Runner Portal</a> with
+      <code>rohan@nearbuy.demo</code> / <code>Runner123!</code>. Offers come from real seller requests and every delivery needs the
+      customer's OTP.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var form = document.getElementById('apply');
+  var err = document.getElementById('err');
+  var submit = document.getElementById('submit');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    err.classList.add('hidden');
+    var name = document.getElementById('name').value.trim();
+    var contact = document.getElementById('contact').value.trim();
+    var vehicle = document.getElementById('vehicle').value;
+    var locality = document.getElementById('locality').value.trim();
+    var message = document.getElementById('message').value.trim();
+    if (name.length < 2 || contact.length < 5 || !locality || message.length < 10) {
+      err.textContent = 'Please complete every field — the message needs at least 10 characters.';
+      err.classList.remove('hidden');
+      return;
+    }
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    try {
+      var res = await fetch('/api/customer/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-NearBuy-Request': '1' },
+        body: JSON.stringify({
+          name: name,
+          contact: contact,
+          topic: 'Delivery partner application',
+          message: 'Vehicle: ' + vehicle + '\nLocality: ' + locality + '\n\n' + message
+        })
+      });
+      var data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'The application could not be saved.');
+      document.getElementById('done-text').textContent = data.message + ' Operations reviews applications before offers are sent.';
+      form.classList.add('hidden');
+      document.getElementById('done').classList.remove('hidden');
+    } catch (ex) {
+      err.textContent = ex.message;
+      err.classList.remove('hidden');
+      submit.disabled = false;
+      submit.textContent = 'Send application';
+    }
+  });
+})();
+</script>
+</body>
+</html>

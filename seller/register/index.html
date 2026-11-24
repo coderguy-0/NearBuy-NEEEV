@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#06245e" />
+<meta name="description" content="Register your local business on NearBuy: create your seller account, add business information and complete KYC verification." />
+<title>Seller registration · NearBuy Seller Hub</title>
+<link rel="icon" href="/public/assets/nearbuy-logo.png" />
+<link rel="stylesheet" href="/partner/app.css" />
+<style>
+  .wizard-steps { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+  .wizard-steps .step { flex:1; min-width:160px; border:1px solid var(--border); border-radius:12px; padding:10px 12px; background:#fff; font-size:12.5px; color:var(--muted); }
+  .wizard-steps .step.active { border-color: var(--blue); background: var(--tint, #eff7ff); color: var(--deep); }
+  .wizard-steps .step.done { border-color:#bfe9d0; background:#eefaf2; }
+  .wizard-steps .step b { display:block; font-size:13px; color:var(--deep); }
+  .doc-row { display:grid; grid-template-columns: 200px minmax(0,1fr) auto; gap:8px; align-items:center; margin-bottom:8px; }
+  @media (max-width: 640px) { .doc-row { grid-template-columns: 1fr; } }
+</style>
+<link rel="stylesheet" href="/public/assets/brand.css" />
+</head>
+<body>
+<main class="content" style="max-width:860px;margin:0 auto;padding:28px 18px 60px">
+  <div class="row" style="margin-bottom:18px">
+    <img src="/public/assets/nearbuy-logo.png" alt="NearBuy" width="44" height="44" style="border-radius:12px;background:#fff" />
+    <div><b style="font-size:19px;color:var(--deep)">NearBuy</b>
+      <div class="small muted">Shop Local. Grow Together.</div></div>
+    <span class="spacer" style="flex:1"></span>
+    <a class="btn btn-sm" href="/seller/">Partner sign-in</a>
+  </div>
+
+  <div class="card">
+    <div class="small strong" style="letter-spacing:.12em;text-transform:uppercase;color:var(--blue)">Seller Hub</div>
+    <h1 style="margin:6px 0 6px">Bring your business online</h1>
+    <p class="muted">Create your seller account, tell us about the business and upload KYC documents. The Admin Portal reviews every
+      application — only after approval does your shop get its Seller ID, listings and order receiving enabled.</p>
+
+    <div class="wizard-steps" id="steps">
+      <div class="step active" data-step="1"><b>1 · Create account</b>Owner details and sign-in</div>
+      <div class="step" data-step="2"><b>2 · Business information</b>Shop profile and address</div>
+      <div class="step" data-step="3"><b>3 · KYC &amp; verification</b>Documents for admin review</div>
+    </div>
+
+    <form id="wiz" class="stack" novalidate autocomplete="on">
+      <!-- Step 1 -->
+      <section data-panel="1">
+        <h2 style="font-size:18px">Create your account</h2>
+        <div class="grid g2">
+          <div class="field"><label for="f-name">Owner’s full name *</label><input class="input" id="f-name" required minlength="2" autocomplete="name" /></div>
+          <div class="field"><label for="f-mobile">Mobile number *</label><input class="input" id="f-mobile" required inputmode="numeric" placeholder="10-digit mobile" autocomplete="tel" /></div>
+          <div class="field"><label for="f-email">Email address *</label><input class="input" id="f-email" type="email" required autocomplete="email" /></div>
+          <div class="field"><label for="f-shop">Business name *</label><input class="input" id="f-shop" required minlength="2" placeholder="Green Basket Market" /></div>
+          <div class="field"><label for="f-password">Password *</label><input class="input" id="f-password" type="password" required minlength="8" autocomplete="new-password" /></div>
+          <div class="field"><label for="f-confirm">Confirm password *</label><input class="input" id="f-confirm" type="password" required minlength="8" autocomplete="new-password" /></div>
+          <div class="field"><label for="f-category">Business category *</label><select class="input" id="f-category" required><option value="">Loading categories…</option></select></div>
+          <div class="field"><label for="f-shoptype">Shop type *</label>
+            <select class="input" id="f-shoptype">
+              <option value="retail">Retail store</option><option value="wholesale">Wholesale</option>
+              <option value="service">Service provider</option><option value="food">Food &amp; beverage</option>
+              <option value="pharmacy">Pharmacy</option>
+            </select></div>
+        </div>
+        <label class="row tight small" style="margin-top:6px"><input type="checkbox" id="f-terms" required /> I agree to the NearBuy seller terms and conditions *</label>
+        <div class="row" style="margin-top:14px"><button class="btn btn-primary" type="button" id="to-step2">Continue to business information →</button></div>
+      </section>
+
+      <!-- Step 2 -->
+      <section data-panel="2" hidden>
+        <h2 style="font-size:18px">Business information</h2>
+        <div class="grid g2">
+          <div class="field"><label for="b-legal">Legal business name</label><input class="input" id="b-legal" placeholder="Leave blank if same as business name" /></div>
+          <div class="field"><label for="b-display">Display shop name *</label><input class="input" id="b-display" required /></div>
+          <div class="field"><label for="b-phone">Business contact number</label><input class="input" id="b-phone" inputmode="numeric" /></div>
+          <div class="field"><label for="b-bemail">Business email</label><input class="input" id="b-bemail" type="email" /></div>
+          <div class="field"><label for="b-address">Shop address *</label><input class="input" id="b-address" required placeholder="14, Hauz Khas Village" /></div>
+          <div class="field"><label for="b-locality">Locality / street</label><input class="input" id="b-locality" placeholder="Hauz Khas" /></div>
+          <div class="field"><label for="b-city">City *</label><input class="input" id="b-city" required value="Delhi" /></div>
+          <div class="field"><label for="b-state">State *</label><input class="input" id="b-state" required value="Delhi" /></div>
+          <div class="field"><label for="b-pincode">PIN code *</label><input class="input" id="b-pincode" required pattern="\d{6}" inputmode="numeric" placeholder="110016" /></div>
+          <div class="field"><label for="b-ownership">Ownership type</label>
+            <select class="input" id="b-ownership">
+              <option value="proprietorship">Proprietorship</option><option value="partnership">Partnership</option>
+              <option value="llp">LLP</option><option value="private_limited">Private limited</option>
+            </select></div>
+          <div class="field"><label for="b-lat">Latitude (optional)</label><input class="input" id="b-lat" type="number" step="0.000001" /></div>
+          <div class="field"><label for="b-lng">Longitude (optional)</label><input class="input" id="b-lng" type="number" step="0.000001" /></div>
+        </div>
+        <div class="field"><label for="b-desc">Business description</label><textarea class="textarea" id="b-desc" rows="3" placeholder="What you sell, delivery or pickup options…"></textarea></div>
+        <div class="row" style="margin-top:14px">
+          <button class="btn" type="button" data-back="1">← Back</button>
+          <button class="btn btn-primary" type="button" id="create-account">Create account &amp; continue to KYC →</button>
+        </div>
+      </section>
+
+      <!-- Step 3 -->
+      <section data-panel="3" hidden>
+        <h2 style="font-size:18px">KYC &amp; business verification</h2>
+        <p class="muted small">Sign in with the account you just created, then attach documents. Only documents needed for the applicable
+          verification are collected. Files are validated before storage; the demo records secure document metadata.</p>
+        <div class="grid g2">
+          <div class="field"><label for="k-email">Account email *</label><input class="input" id="k-email" type="email" required /></div>
+          <div class="field"><label for="k-password">Account password *</label><input class="input" id="k-password" type="password" required /></div>
+          <div class="field"><label for="k-pan">PAN number (where applicable)</label><input class="input" id="k-pan" placeholder="ABCDE1234F" /></div>
+          <div class="field"><label for="k-gst">GST number (where applicable)</label><input class="input" id="k-gst" /></div>
+        </div>
+        <b class="small">Documents * (at least one)</b>
+        <div id="docs" style="margin-top:8px">
+          <div class="doc-row">
+            <select class="input" data-doc-type>
+              <option value="pan">PAN card</option><option value="gst">GST certificate</option>
+              <option value="business_registration">Business registration</option>
+              <option value="address_proof">Shop address proof</option><option value="owner_id">Owner identity proof</option>
+            </select>
+            <input class="input" type="file" data-doc-file accept=".pdf,.jpg,.jpeg,.png" />
+          </div>
+        </div>
+        <button class="btn btn-sm" type="button" id="add-doc">＋ Add another document</button>
+        <div class="row" style="margin-top:14px">
+          <button class="btn" type="button" data-back="2">← Back</button>
+          <button class="btn btn-primary" type="button" id="submit-kyc">Submit for verification</button>
+        </div>
+      </section>
+
+      <div class="form-error hidden" id="err" role="alert"></div>
+    </form>
+
+    <div id="done" class="hidden" style="margin-top:16px">
+      <div class="banner-note ok" id="done-text" role="status"></div>
+      <div class="row" style="margin-top:12px">
+        <a class="btn btn-primary" href="/seller/">Open the Seller Hub</a>
+        <a class="btn" href="/">Back to NearBuy home</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Already selling here?</h3>
+    <p class="muted small">Demo sellers can sign in at <a href="/seller/">the Seller Hub</a> with
+      <code>owner@nearbuy.demo</code> / <code>Seller123!</code>. Every order, stock change and handover you make there is the same
+      record the customer sees.</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  const errBox = $('#err');
+  let createdEmail = '';
+
+  function fail(msg) {
+    errBox.textContent = msg;
+    errBox.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function clearFail() { errBox.classList.add('hidden'); }
+
+  function showStep(n) {
+    $$('[data-panel]').forEach((p) => { p.hidden = Number(p.dataset.panel) !== n; });
+    $$('#steps .step').forEach((s) => {
+      const i = Number(s.dataset.step);
+      s.classList.toggle('active', i === n);
+      s.classList.toggle('done', i < n);
+    });
+    clearFail();
+  }
+
+  // Load categories from the shared storefront API.
+  fetch('/api/customer/categories', { headers: { 'X-NearBuy-Request': '1' } })
+    .then((r) => r.json())
+    .then((data) => {
+      const sel = $('#f-category');
+      sel.innerHTML = '<option value="">Choose a category…</option>' +
+        ((data.categories || []).map((c) => `<option value="${c.slug}">${c.name.replace(/</g, '&lt;')}</option>`).join(''));
+    })
+    .catch(() => { $('#f-category').innerHTML = '<option value="">Categories unavailable — refresh to retry</option>'; });
+
+  $$('[data-back]').forEach((b) => b.addEventListener('click', () => showStep(Number(b.dataset.back))));
+
+  $('#to-step2').addEventListener('click', () => {
+    const pw = $('#f-password').value, confirm = $('#f-confirm').value;
+    if ($('#f-name').value.trim().length < 2) return fail('Enter the owner’s full name.');
+    if (!/^\S+@\S+\.\S+$/.test($('#f-email').value.trim())) return fail('Enter a valid email address.');
+    if (!/^(\+?91)?\d{10}$/.test($('#f-mobile').value.replace(/[\s-]/g, ''))) return fail('Enter a valid 10-digit mobile number.');
+    if ($('#f-shop').value.trim().length < 2) return fail('Enter your business name.');
+    if (!$('#f-category').value) return fail('Choose a business category.');
+    if (pw.length < 8) return fail('Password must be at least 8 characters.');
+    if (pw !== confirm) return fail('Passwords do not match.');
+    if (!$('#f-terms').checked) return fail('Accept the terms and conditions to continue.');
+    $('#b-display').value = $('#b-display').value || $('#f-shop').value.trim();
+    showStep(2);
+  });
+
+  $('#add-doc').addEventListener('click', () => {
+    $('#docs').insertAdjacentHTML('beforeend',
+      '<div class="doc-row"><select class="input" data-doc-type><option value="pan">PAN card</option><option value="gst">GST certificate</option><option value="business_registration">Business registration</option><option value="address_proof">Shop address proof</option><option value="owner_id">Owner identity proof</option><option value="other">Other</option></select><input class="input" type="file" data-doc-file accept=".pdf,.jpg,.jpeg,.png" /></div>');
+  });
+
+  function businessPayload() {
+    return {
+      legalName: $('#b-legal').value.trim() || $('#f-shop').value.trim(),
+      businessName: $('#b-display').value.trim(),
+      contactNumber: $('#b-phone').value.trim() || undefined,
+      businessEmail: $('#b-bemail').value.trim() || undefined,
+      address: $('#b-address').value.trim(),
+      locality: $('#b-locality').value.trim() || undefined,
+      city: $('#b-city').value.trim(),
+      state: $('#b-state').value.trim(),
+      country: 'India',
+      pincode: $('#b-pincode').value.trim(),
+      ownershipType: $('#b-ownership').value,
+      shopType: $('#f-shoptype').value,
+      businessCategory: $('#f-category').value,
+      lat: $('#b-lat').value ? Number($('#b-lat').value) : undefined,
+      lng: $('#b-lng').value ? Number($('#b-lng').value) : undefined,
+      description: $('#b-desc').value.trim() || undefined
+    };
+  }
+
+  async function post(url, body) {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-NearBuy-Request': '1' },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || ('Request failed (' + res.status + ')'));
+    return data;
+  }
+
+  $('#wiz').addEventListener('submit', (e) => e.preventDefault());
+
+  $('#create-account').addEventListener('click', async () => {
+    clearFail();
+    if ($('#b-display').value.trim().length < 2) return fail('Enter the display shop name.');
+    if ($('#b-address').value.trim().length < 5) return fail('Enter the full shop address.');
+    if (!$('#b-city').value.trim()) return fail('Enter the city.');
+    if (!$('#b-state').value.trim()) return fail('Enter the state.');
+    if (!/^\d{6}$/.test($('#b-pincode').value.trim())) return fail('Enter a valid 6-digit PIN code.');
+    const btn = $('#create-account');
+    btn.disabled = true; btn.textContent = 'Creating account…';
+    try {
+      const data = await post('/api/customer/seller/register', {
+        name: $('#f-name').value.trim(),
+        mobile: $('#f-mobile').value.trim(),
+        email: $('#f-email').value.trim(),
+        password: $('#f-password').value,
+        confirmPassword: $('#f-confirm').value,
+        businessName: $('#f-shop').value.trim(),
+        category: $('#f-category').value,
+        shopType: $('#f-shoptype').value,
+        terms: $('#f-terms').checked,
+        legalName: $('#b-legal').value.trim() || undefined,
+        displayName: $('#b-display').value.trim(),
+        businessPhone: $('#b-phone').value.trim() || undefined,
+        businessEmail: $('#b-bemail').value.trim() || undefined,
+        address: $('#b-address').value.trim(),
+        locality: $('#b-locality').value.trim() || undefined,
+        city: $('#b-city').value.trim(),
+        state: $('#b-state').value.trim(),
+        country: 'India',
+        pincode: $('#b-pincode').value.trim(),
+        ownershipType: $('#b-ownership').value,
+        lat: $('#b-lat').value ? Number($('#b-lat').value) : undefined,
+        lng: $('#b-lng').value ? Number($('#b-lng').value) : undefined,
+        description: $('#b-desc').value.trim() || undefined
+      });
+      createdEmail = $('#f-email').value.trim();
+      $('#k-email').value = createdEmail;
+      $('#done-text').textContent = data.message || 'Account created. Complete KYC next.';
+      $('#done').classList.remove('hidden');
+      showStep(3);
+    } catch (ex) {
+      fail(ex.message);
+      btn.disabled = false; btn.textContent = 'Create account & continue to KYC →';
+    }
+  });
+
+  $('#submit-kyc').addEventListener('click', async () => {
+    clearFail();
+    const docs = $$('.doc-row').map((row) => ({
+      type: row.querySelector('[data-doc-type]').value,
+      fileName: row.querySelector('[data-doc-file]').files[0] && row.querySelector('[data-doc-file]').files[0].name,
+      fileType: row.querySelector('[data-doc-file]').files[0] && row.querySelector('[data-doc-file]').files[0].type,
+      fileSize: row.querySelector('[data-doc-file]').files[0] && row.querySelector('[data-doc-file]').files[0].size
+    })).filter((d) => d.fileName);
+    if (!docs.length) return fail('Attach at least one KYC document.');
+    const btn = $('#submit-kyc');
+    btn.disabled = true; btn.textContent = 'Submitting…';
+    try {
+      const data = await post('/api/customer/seller/kyc', Object.assign({
+        email: $('#k-email').value.trim(),
+        password: $('#k-password').value,
+        pan: $('#k-pan').value.trim() || undefined,
+        gst: $('#k-gst').value.trim() || undefined,
+        documents: docs
+      }, businessPayload()));
+      $('#wiz').classList.add('hidden');
+      $('#steps').classList.add('hidden');
+      $('#done-text').className = 'banner-note ok';
+      $('#done-text').textContent = (data.message || 'Verification submitted.') + ' You can sign in now — selling unlocks once the admin team approves your shop.';
+      $('#done').classList.remove('hidden');
+    } catch (ex) {
+      fail(ex.message);
+      btn.disabled = false; btn.textContent = 'Submit for verification';
+    }
+  });
+})();
+</script>
+</body>
+</html>

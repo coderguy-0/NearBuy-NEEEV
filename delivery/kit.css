@@ -1,0 +1,127 @@
+/* NearBuy Delivery · kit
+ * The tiny design system used by the delivery front doors (partner.html,
+ * delivery-admin.html): a centred auth card on the delivery blue.
+ */
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/delivery/fonts/dm-sans-latin-wght-normal.woff2') format('woff2');
+}
+
+:root {
+  --blue: #0041f5;
+  --blue-deep: #0030b8;
+  --ink: #0a1020;
+  --muted: #5c6577;
+  --line: #e3e7f2;
+  --card: #ffffff;
+  --bg: #f4f6fc;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 460px at 8% -12%, rgba(0, 65, 245, .12), transparent 62%),
+    radial-gradient(800px 420px at 96% 6%, rgba(0, 65, 245, .08), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.6 'DM Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* centred auth layout */
+.auth {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(10, 16, 32, .12);
+}
+
+.panel { width: min(460px, 100%); }
+
+.stack { padding: 34px 30px; }
+
+/* brand row */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.brand img { display: block; }
+
+.brand > span {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.brand-accent { color: var(--blue); font-weight: 700; }
+
+.brand small {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+
+.muted {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: 600 15px/1 'DM Sans', system-ui, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+}
+
+.btn.primary {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 12px 26px rgba(0, 65, 245, .3);
+}
+
+.btn.primary:hover { background: var(--blue-deep); transform: translateY(-1px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+  .btn.primary:hover { transform: none; }
+}

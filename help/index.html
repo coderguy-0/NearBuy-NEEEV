@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#06245e" />
+  <meta name="description" content="Quick routes into every NearBuy support surface, the eight most-asked questions, and the enquiry form for reaching the team." />
+  <title>Help & Support — NearBuy</title>
+  <link rel="icon" href="/public/assets/nearbuy-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/home.css" />
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js-ready');
+      try {
+        var pref = localStorage.getItem('nearbuy.motion');
+        if (pref === 'reduced' || (!pref && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+          d.setAttribute('data-motion', 'reduced');
+        }
+      } catch (e) {}
+      setTimeout(function () {
+        if (!window.__nbHomeReady) d.classList.remove('js-ready');
+      }, 2500);
+    })();
+  </script>
+<link rel="stylesheet" href="/public/assets/brand.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 7h12l1.2 12.7a1.2 1.2 0 0 1-1.2 1.3H6a1.2 1.2 0 0 1-1.2-1.3z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></symbol>
+    <symbol id="i-store" viewBox="0 0 24 24"><path d="M3.4 9.4 5 4h14l1.6 5.4"/><path d="M4 9.4h16V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M9.4 21v-5.6h5.2V21"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 5.5h10.5v11H2.5z"/><path d="M13 8.5h4.2l3.8 3.8v4.2H13z"/><circle cx="6.6" cy="18.4" r="1.9"/><circle cx="17.4" cy="18.4" r="1.9"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.9-3.9"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5.4L12 2.5 4 5.4V12c0 6 8 10 8 10z"/><path d="m8.6 11.8 2.3 2.3 4.5-4.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.4V12l3.2 2"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.7 6.3.9-4.6 4.4 1.1 6.2-5.5-3-5.5 3 1.1-6.2L3 9.6l6.3-.9z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12.6 5 5L20 6.6"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 2.6 21 7v10l-9 4.4L3 17V7z"/><path d="m3 7 9 4.4L21 7"/><path d="M12 21.4V11.4"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-5 3 3 5-7"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 3 1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M18.4 15.6l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-rupee" viewBox="0 0 24 24"><path d="M6 3h12"/><path d="M6 8h12"/><path d="M6 13h3.6a5 5 0 0 0 0-10"/><path d="m6.4 13 8.6 8"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-1a5 5 0 0 0-5-5H7a5 5 0 0 0-5 5v1"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-1a5 5 0 0 0-4-4.9"/><path d="M16.6 3.2a4 4 0 0 1 0 7.6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2.2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3.8V9h-5.2"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="m3.6 6.5 8.4 6 8.4-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h3.4l1.8 4.4-2.2 1.6a12 12 0 0 0 5 5l1.6-2.2L19 13.6V17a2 2 0 0 1-2.2 2A16 16 0 0 1 3 5.2 2 2 0 0 1 5 3z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2.4 9 5-9 5-9-5z"/><path d="m3 12.4 9 5 9-5"/><path d="m3 17.4 9 5 9-5"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3.5 12.6 6.2 4.8A2 2 0 0 1 8.1 3.4h7.8a2 2 0 0 1 1.9 1.4l2.7 7.8"/><path d="M3.5 12.6h4.2l1.5 2.6h5.6l1.5-2.6h4.2V18a2.4 2.4 0 0 1-2.4 2.4H5.9A2.4 2.4 0 0 1 3.5 18z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  </svg>
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="/" aria-label="NearBuy home">
+        <span class="brand__mark" aria-hidden="true"><img src="/public/assets/nearbuy-logo.png" width="42" height="42" alt="" decoding="async" /></span>
+        <span class="brand__word">Near<em>Buy</em></span>
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/portal.html#/shop/explore">Explore shops</a>
+        <a href="/about/">About</a>
+        <a href="/roadmap/">Checklist</a>
+        <a href="/help/" aria-current="page">Help</a>
+        <a href="/help/#support">Contact</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/portal.html">
+          <svg class="ic"><use href="#i-layers"/></svg>
+          NearBuy One
+        </a>
+        <a class="btn btn--primary btn--sm" href="/customer/login/">Sign in</a>
+        <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+          <svg class="ic"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap page-hero__inner">
+        <span class="page-hero__crumb"><a href="/">Home</a> / Help</span>
+        <span class="eyebrow eyebrow--live">Help centre</span>
+        <h1>Help &amp; Support.</h1>
+        <p>Quick routes into every support surface, the questions people ask most, and a direct line to the team. In the product, each workspace also carries its own help: the storefront, the Seller Hub and the partner app all have a help centre with context-specific answers.</p>
+        <div class="page-hero__actions">
+          <a class="btn btn--primary" href="#support">Send an enquiry <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost" href="/portal.html#/shop/help">Open in-app help</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head" data-reveal>
+          <span class="eyebrow">Quick links</span>
+          <h2>Jump straight to the right place.</h2>
+        </div>
+        <div class="help-links">
+          <a class="help-link" href="/portal.html#/shop/orders" data-reveal><svg class="ic"><use href="#i-box"/></svg><b>Track an order</b><small>Live status, courier and proof of delivery for every order you have placed.</small></a>
+          <a class="help-link" href="/portal.html#/sell/support" data-reveal><svg class="ic"><use href="#i-store"/></svg><b>Seller support</b><small>Tickets, FAQs and the seller academy for running your shop.</small></a>
+          <a class="help-link" href="/portal.html#/deliver/safety" data-reveal><svg class="ic"><use href="#i-shield"/></svg><b>Partner safety</b><small>Safety centre, incident reporting and operational limits for couriers.</small></a>
+          <a class="help-link" href="#support" data-reveal><svg class="ic"><use href="#i-mail"/></svg><b>Report an issue</b><small>Send the team a query — four fields, reviewed in this demo the same day.</small></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--cream" id="faq">
+      <div class="wrap faq-wrap">
+        <div class="faq-head" data-reveal>
+          <span class="eyebrow eyebrow--dark">Questions</span>
+          <h2>Eight things people ask.</h2>
+          <p>Need more? The in-app help centre goes deeper per workspace, or send us a question below.</p>
+        </div>
+        <div class="faq" data-reveal>
+          <details class="faq__item" name="helpfaq" open>
+            <summary>What is NearBuy?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>NearBuy is a neighbourhood commerce platform that connects customers with local shops and short-distance delivery partners. It brings nearby stores, everyday products and Runner delivery together in one place.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>How do I find shops that deliver to me?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Open the customer storefront and choose your neighbourhood. Only shops that are serviceable to your address are shown, with distance, opening hours and what they sell.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>Can I order from more than one shop at once?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Yes. Your basket holds items from several shops and splits into one order per shop at checkout, each with its own fulfilment method and tracking.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>How do I register my shop?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Use the seller registration route to work through a seven-step application: account, business, store details, location, operations, payout and review. In this demo verification is simulated and you can explore the Seller Hub immediately.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>How do I become a delivery partner?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Start the partner application, pass the 18+ age gate, add documents and an emergency contact, read the safety briefing, then go online. You control your distance, parcel categories and availability at any time.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>What does delivery cost?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Delivery fees follow the pricing bands set for your service area and are shown before you confirm. Shops may offer free delivery above a basket value — the storefront labels those offers.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>How do refunds and returns work?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>Raise an issue on an order from your account. The shop reviews it, can restock items and issue a refund; the ledger and settlement statement reflect the adjustment.</p>
+          </details>
+          <details class="faq__item" name="helpfaq">
+            <summary>Is my data shared between portals?<span class="faq__plus" aria-hidden="true"></span></summary>
+            <p>No. Customer, seller, partner, fleet and operations sessions are separate and isolated. Signing in to one portal never grants access to another.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="wrap">
+        <div class="section__head section__head--split" data-reveal>
+          <div>
+            <span class="eyebrow">Support routes</span>
+            <h2>Every way to reach us.</h2>
+          </div>
+          <p>The enquiry form lives on the homepage so it is always one tap from the front door. Queries land in the operations console under <strong>Enquiries</strong>; in this prototype they are stored in your browser only.</p>
+        </div>
+        <div class="help-links">
+          <a class="help-link" href="/#support" data-reveal><svg class="ic"><use href="#i-mail"/></svg><b>Enquiry form</b><small>Name, contact, topic and message — the fastest way to reach the team.</small></a>
+          <a class="help-link" href="/portal.html#/shop/help" data-reveal><svg class="ic"><use href="#i-bag"/></svg><b>Storefront help</b><small>Order, refund and delivery answers in the customer workspace.</small></a>
+          <a class="help-link" href="/portal.html#/ops/enquiries" data-reveal><svg class="ic"><use href="#i-inbox"/></svg><b>Operations inbox</b><small>Where submitted enquiries are triaged by staff (access code required).</small></a>
+          <a class="help-link" href="/about/#trust" data-reveal><svg class="ic"><use href="#i-lock"/></svg><b>Trust &amp; privacy</b><small>How sessions, demo data and verification are handled in this prototype.</small></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <a class="brand" href="/" aria-label="NearBuy home">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="/public/assets/nearbuy-logo.png" width="48" height="48" alt="" loading="lazy" decoding="async" />
+          </span>
+          <span class="brand__word">Near<em>Buy</em></span>
+        </a>
+        <p class="footer__tagline">Your neighbourhood.<br />Everything you need.</p>
+        <p class="footer__meta">Hauz Khas · New Delhi<br />hello@nearbuy.in</p>
+        
+      </div>
+      
+    </div>
+    <div class="wrap footer__bottom">
+      <span>© <span id="year">2026</span> NearBuy. All rights reserved.</span>
+      <span class="footer__disclaimer">Prototype demo · sample data only · no real payments, dispatch or KYC.</span>
+      
+    </div>
+  <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
+            <span class="footer__motion-dot" aria-hidden="true"></span> <span id="motionLabel">Reduce motion</span>
+          </button>
+</footer>
+  <script src="/home.js"></script>
+</body>
+</html>
