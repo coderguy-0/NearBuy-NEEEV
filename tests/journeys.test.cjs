@@ -778,9 +778,9 @@ test('journey 14 — roles, ownership and CSRF are enforced on the server', asyn
 
 test('journey 15 — every surface is responsive and reachable', () => {
   const htmlFiles = [
-    'index.html', 'portal.html', 'seller.html', 'partner.html', 'business.html', 'delivery-admin.html',
-    'customer/index.html', 'customer/login/index.html', 'seller/index.html', 'runner/index.html',
-    'admin/index.html', 'about/index.html', 'help/index.html', 'roadmap/index.html'
+    'index.html', 'demo/index.html', 'customer/index.html', 'customer/login/index.html',
+    'seller/index.html', 'runner/index.html', 'admin/index.html', 'seller/register/index.html',
+    'runner/register/index.html', 'about/index.html', 'help/index.html', 'roadmap/index.html'
   ];
   for (const file of htmlFiles) {
     const src = fs.readFileSync(path.join(ROOT, file), 'utf8');

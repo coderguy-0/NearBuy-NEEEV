@@ -1,0 +1,12 @@
+# Runtime state: the SQLite database, its WAL files and the generated OTP key.
+# Never commit these — they are per-deployment data and secrets, not source.
+data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.nearbuy-otp-key
+
+# Local tooling / OS noise
+node_modules/
+.DS_Store
+*.log

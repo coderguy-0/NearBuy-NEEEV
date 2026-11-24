@@ -7,9 +7,7 @@
   <meta name="description" content="NearBuy — Your neighbourhood, everything you need. Discover local shops, order everyday essentials with local pickup or NearBuy Runner delivery, and join as a seller or delivery partner." />
   <title>NearBuy — Your Neighbourhood. Everything You Need.</title>
   <link rel="icon" href="/public/assets/nearbuy-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/delivery/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" as="image" href="/public/assets/hero-neighbourhood.jpg" fetchpriority="high" />
   <link rel="stylesheet" href="/home.css" />
   <script>
@@ -78,14 +76,14 @@
         <a href="#categories">Categories</a>
         <a href="#how">How it works</a>
         <a href="/about/">About</a>
-        <a href="#support">Contact</a>
+        <a href="/help/#enquiry">Contact</a>
       </nav>
 
       <div class="nav__actions">
-        <button class="btn btn--ghost btn--sm nav__portal-btn" data-open-chooser>
+        <a class="btn btn--ghost btn--sm nav__portal-btn" href="/demo/">
           <svg class="ic"><use href="#i-layers"/></svg>
-          Choose your portal
-        </button>
+          Try the demo
+        </a>
         <button class="btn btn--primary btn--sm" data-open-chooser>Sign in</button>
         <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
           <svg class="ic"><use href="#i-menu"/></svg>
@@ -129,9 +127,9 @@
           </div>
 
           <dl class="hero__stats">
-            <div><dt>3 portals</dt><dd>One connected platform</dd></div>
-            <div><dt>15–35 min</dt><dd>Local delivery window</dd></div>
-            <div><dt>4.9 <svg class="ic"><use href="#i-star"/></svg></dt><dd>Average shop rating</dd></div>
+            <div><dt>4 portals</dt><dd>One connected platform</dd></div>
+            <div><dt>20 categories</dt><dd>Everyday essentials nearby</dd></div>
+            <div><dt>Delivery or pickup</dt><dd>Chosen per shop at checkout</dd></div>
           </dl>
         </div>
 
@@ -406,7 +404,7 @@
         <div class="section__head" data-reveal>
           <span class="eyebrow">Inside the portals</span>
           <h2 id="previewsTitle">Built for each side of the counter.</h2>
-          <p>Three separate operational experiences, one shared, real-time neighbourhood record.</p>
+          <p>Three separate operational experiences, one shared neighbourhood database.</p>
         </div>
 
         <div class="tabs" role="tablist" aria-label="Portal previews" data-reveal>
@@ -435,7 +433,7 @@
                 <li>Live order status, history, returns and support</li>
               </ul>
               <div class="preview__cta">
-                <a class="btn btn--primary btn--sm" href="/customer/">Open customer portal <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+                <a class="btn btn--primary btn--sm" href="/customer/">Open the storefront <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
                 <a class="btn btn--ghost btn--sm" href="/customer/#/products">Browse products</a>
               </div>
             </div>
@@ -468,8 +466,8 @@
                 <li>Staff accounts, promotions and insights</li>
               </ul>
               <div class="preview__cta">
-                <a class="btn btn--primary btn--sm" href="/seller/">Open seller portal <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
-                <a class="btn btn--ghost btn--sm" href="/seller/">Open the Seller Hub</a>
+                <a class="btn btn--primary btn--sm" href="/seller/">Open the Seller Hub <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+                <a class="btn btn--ghost btn--sm" href="/seller/register/">Register your shop</a>
               </div>
             </div>
             <div class="preview__device">
@@ -504,8 +502,8 @@
                 <li>Earnings dashboard, payouts and safety support</li>
               </ul>
               <div class="preview__cta">
-                <a class="btn btn--primary btn--sm" href="/runner/">Open runner portal <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
-                <a class="btn btn--ghost btn--sm" href="/runner/">Open the Runner Portal</a>
+                <a class="btn btn--primary btn--sm" href="/runner/">Open the Runner Portal <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+                <a class="btn btn--ghost btn--sm" href="/runner/register/">Apply to deliver</a>
               </div>
             </div>
             <div class="preview__device">
@@ -553,7 +551,7 @@
                 <li><svg class="ic"><use href="#i-check"/></svg>Settlements and sales reports</li>
               </ul>
               <div class="partner-card__cta">
-                <a class="btn btn--dark btn--sm" href="/seller/">Register your shop <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+                <a class="btn btn--dark btn--sm" href="/seller/register/">Register your shop <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
                 <a class="learn learn--dark" href="/seller/">Seller login <svg class="ic"><use href="#i-arrow-up"/></svg></a>
               </div>
             </div>
@@ -573,7 +571,7 @@
                 <li><svg class="ic"><use href="#i-check"/></svg>Safety tools and local support</li>
               </ul>
               <div class="partner-card__cta">
-                <a class="btn btn--dark btn--sm" href="/runner/">Become a delivery partner <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
+                <a class="btn btn--dark btn--sm" href="/runner/register/">Become a delivery partner <svg class="ic ic--arrow"><use href="#i-arrow"/></svg></a>
                 <a class="learn learn--dark" href="/runner/">Partner login <svg class="ic"><use href="#i-arrow-up"/></svg></a>
               </div>
             </div>
@@ -602,7 +600,7 @@
 
         <div class="trust__note" data-reveal>
           <svg class="ic"><use href="#i-shield"/></svg>
-          <p><b>This website is a working prototype.</b> All accounts, shops, orders, OTPs, earnings and verification steps shown are simulated demo data stored in your browser. No real payments, dispatch or identity checks take place.</p>
+          <p><b>This deployment runs a demo dataset.</b> The accounts, shops, products and orders you see are seeded sample records kept in the platform database, shared between demo visitors. Document checks, payouts and card payments are not connected to live providers, so no real payment, dispatch or identity verification takes place.</p>
         </div>
       </div>
     </section>
@@ -628,11 +626,11 @@
           </details>
           <details class="faq__item" name="faq">
             <summary>How do I register my shop?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Use the seller portal to create a shop profile and add your catalogue, timings and delivery radius. In this demo you can explore a fully working Seller Hub instantly — verification is simulated.</p>
+            <p>Start the three-step registration at <a href="/seller/register/">the seller application</a>: account, business details, then KYC documents. The operations team reviews every application in the Admin Portal; once approved, your shop, catalogue, timings and delivery radius all live in the Seller Hub.</p>
           </details>
           <details class="faq__item" name="faq">
             <summary>How can I become a delivery partner?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Register through the delivery partner portal, complete eligibility and identity verification, then go online. You choose your distance, parcel categories and availability at any time.</p>
+            <p>Send the application from <a href="/runner/register/">the delivery-partner form</a>. Operations reviews it before offers are sent, and once you are on the Runner Portal you choose your availability and go online when you want.</p>
           </details>
           <details class="faq__item" name="faq">
             <summary>Does NearBuy offer home delivery?<span class="faq__plus" aria-hidden="true"></span></summary>
@@ -644,11 +642,11 @@
           </details>
           <details class="faq__item" name="faq">
             <summary>How are delivery charges calculated?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Delivery is priced in short distance bands from the shop to you. In this demo, delivery is free above a small order value and pickup is always free; no real payment is ever taken.</p>
+            <p>Delivery is priced in short distance bands from the shop to your address and quoted by the server at checkout, so you always see the exact fee before confirming. Store pickup is free.</p>
           </details>
           <details class="faq__item" name="faq">
             <summary>How can I contact support?<span class="faq__plus" aria-hidden="true"></span></summary>
-            <p>Open the help centre from the customer or partner portal. This prototype stores support notes locally only — it does not contact a real support team.</p>
+            <p>Use the <a href="/help/#enquiry">enquiry form</a> or the help centre inside your portal. Every message is saved to the platform and shows up in the operations inbox; signed-in customers can also open a support ticket tied to their order.</p>
           </details>
         </div>
       </div>
@@ -696,7 +694,7 @@
             <li><a href="/customer/#/help"><svg class="ic"><use href="#i-shield" /></svg> Order &amp; refund help</a></li>
           </ul>
 
-          <p class="support__meta">Average first reply in this demo: <b>same day</b> · Hauz Khas, New Delhi</p>
+          <p class="support__meta">Reviewed by the operations team · Hauz Khas, New Delhi</p>
         </div>
 
         <div class="support__card" data-reveal>
@@ -704,7 +702,7 @@
             <span class="support__badge"><svg class="ic"><use href="#i-mail" /></svg></span>
             <div>
               <h3>Enquiry form</h3>
-              <p>Four quick fields — a real person reviews every query.</p>
+              <p>Four quick fields — every query lands in the operations inbox.</p>
             </div>
           </div>
 
@@ -728,12 +726,12 @@
               <div class="sfield__select">
                 <select id="enqTopic" name="topic" aria-describedby="enqTopicError">
                   <option value="" selected>Choose a topic</option>
-                  <option>Account Creation</option>
-                  <option>Fee Structure</option>
-                  <option>What Can I Sell?</option>
-                  <option>Account Management</option>
-                  <option>How to Run Ads?</option>
-                  <option>Shipping &amp; Delivery</option>
+                  <option>General enquiry</option>
+                  <option>Order help</option>
+                  <option>Returns &amp; refunds</option>
+                  <option>Selling on NearBuy</option>
+                  <option>Delivery partner</option>
+                  <option>Payments</option>
                   <option>Others</option>
                 </select>
                 <svg class="ic sfield__chevron" aria-hidden="true"><use href="#i-chevron" /></svg>
@@ -756,7 +754,7 @@
             </button>
             <p class="support__fineprint">
               <svg class="ic"><use href="#i-lock" /></svg>
-              <span>Queries land in the NearBuy operations console under <b>Enquiries</b>. This prototype stores your note in this browser only — nothing is emailed and no one is paged.</span>
+              <span>Queries are saved to the NearBuy database and appear under <b>Enquiries</b> in the Admin Portal. No email provider is configured, so nothing is auto-forwarded.</span>
             </p>
           </form>
 
@@ -764,7 +762,7 @@
             <span class="support__done-icon" aria-hidden="true"><svg class="ic"><use href="#i-check" /></svg></span>
             <h3>Thank you for contacting NearBuy!</h3>
             <p>We’ve received your query and will get back to you.</p>
-            <p class="support__done-ref">Reference <b id="enquiryRef">—</b> · saved to the demo enquiry queue</p>
+            <p class="support__done-ref">Reference <b id="enquiryRef">—</b> · saved to the operations inbox</p>
             <div class="support__done-actions">
               <button class="btn btn--ghost btn--sm" type="button" id="enquiryAgain">Send another query</button>
               <a class="btn btn--primary btn--sm" href="/">Back to home</a>
@@ -794,7 +792,7 @@
 
     <div class="wrap footer__bottom">
       <span>© <span id="year">2026</span> NearBuy. All rights reserved.</span>
-      <span class="footer__disclaimer">Prototype demo · sample data only · no real payments, dispatch or KYC.</span>
+      <span class="footer__disclaimer">Demo dataset · no live payment, dispatch or identity provider connected.</span>
       
     </div>
   <button class="footer__motion" id="motionToggle" type="button" aria-pressed="false">
@@ -812,7 +810,7 @@
       <img class="chooser__logo" src="/public/assets/nearbuy-logo.png" width="56" height="56" alt="NearBuy" decoding="async" />
       <span class="eyebrow eyebrow--dark">Choose your experience</span>
       <h2 id="chooserTitle">Where would you like to go?</h2>
-      <p id="chooserDesc">Three separate portals, one NearBuy account system. Sign in or register from any of them.</p>
+      <p id="chooserDesc">Each portal has its own sign-in and its own tools, all running on the same NearBuy platform. Sign in or register from the one you need.</p>
 
       <div class="chooser__list">
         <div class="chooser__row">
@@ -841,11 +839,10 @@
         </div>
       </div>
 
-      <p class="chooser__note"><svg class="ic"><use href="#i-shield"/></svg> Demo accounts open instantly — verification and registration steps are simulated.</p>
+      <p class="chooser__note"><svg class="ic"><use href="#i-shield"/></svg> Prefer to look around first? <a href="/demo/" style="text-decoration:underline">Open the demo accounts</a> — or browse the storefront without signing in.</p>
     </div>
   </div>
 
   <script src="/home.js"></script>
-<a href="/demo/" style="position:fixed;bottom:20px;right:20px;z-index:1000;padding:12px 18px;background:#173b54;color:white;border-radius:24px;font:700 14px system-ui;text-decoration:none;box-shadow:0 4px 20px #0002">Explore 4 demos →</a>
 </body>
 </html>

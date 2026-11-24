@@ -4,11 +4,13 @@
  *
  * Serves the public site and every clean-URL surface from the repository root:
  *
- *   /                    index.html (universal homepage)
- *   /portal.html         NearBuy One product shell (hash-routed workspaces)
- *   /customer/  /seller/  /runner/  /fleet/  /admin/  /control-tower/
+ *   /                    index.html (marketing homepage)
+ *   /customer/  /seller/  /runner/  /admin/   the four live portals
  *   /seller/register/  /runner/register/  /customer/login/
- *   /about/  /help/  /roadmap/  /delivery/  /public/assets/
+ *   /demo/  /about/  /help/  /roadmap/  /delivery/  /public/assets/
+ *
+ * Retired surfaces (they held browser-only demo sessions with hard-coded
+ * passwords) are redirects, never pages: see LEGACY_REDIRECTS below.
  *
  * Behaviour notes
  *   - Directory URLs resolve to their index.html (`/about/` -> about/index.html).
@@ -104,6 +106,27 @@ const notFoundHtml = `<!doctype html>
 </body>
 </html>
 `;
+
+/* Surfaces retired in favour of the live, database-backed portals.
+ * Each entry maps a former URL to the real workspace that replaced it, so old
+ * bookmarks keep working and no visitor ever lands on a fake sign-in again. */
+const LEGACY_REDIRECTS = new Map([
+  ['/portal.html', '/demo/'],
+  ['/seller.html', '/seller/'],
+  ['/business.html', '/seller/'],
+  ['/partner.html', '/runner/'],
+  ['/delivery-admin.html', '/admin/'],
+  ['/fleet/', '/admin/'],
+  ['/control-tower/', '/admin/'],
+  ['/portal', '/demo/'],
+  ['/delivery-admin', '/admin/'],
+  /* /fleet and /control-tower no longer exist on disk; their bare forms are
+   * listed too so a hand-typed URL never reaches the 404 page. The real
+   * directories (/customer, /seller, /runner, /admin) are deliberately absent:
+   * the server's own trailing-slash redirect already owns those URLs. */
+  ['/fleet', '/admin/'],
+  ['/control-tower', '/admin/']
+]);
 
 const BLOCKED_ROOTS = new Set([
   'data',
@@ -211,6 +234,12 @@ const server = http.createServer(async (req, res) => {
   }
 
   const urlPath = (req.url || '/').split('?')[0].split('#')[0] || '/';
+  const retired = LEGACY_REDIRECTS.get(urlPath) || LEGACY_REDIRECTS.get(urlPath.replace(/\/$/, '') || '/');
+  if (retired) {
+    res.writeHead(301, { Location: retired, 'Cache-Control': 'no-cache' });
+    res.end();
+    return;
+  }
   const abs = resolvePath(urlPath);
   if (!abs) {
     res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
